@@ -1,0 +1,1220 @@
+(5) Causation ~= (116) 因果
+(6) Communication ~= (3) 陈述 
+(7) Motion ~= (22) 位移
+(8) No match found for Perception
+(9) No match found for Reciprocality
+(10) No match found for Transitive_action
+(11) Duplication ~= (122) 行为重启
+(12) No match found for Feigning
+(13) Cause_to_amalgamate ~= (180) 结合
+(15) No match found for Separating
+(16) No match found for Body_movement
+(17) No match found for Manipulation
+(18) Posture ~= (128) 姿势变化
+(19) Awareness ~= (88) 思考
+(20) Becoming_aware ~= (7) 发现 
+(21) Categorization ~= (8) 范畴化
+(22) Cogitation ~= (88) 思考
+(23) No match found for Coming_to_believe
+(24) Differentiation ~= (1) 辨别
+(25) Evidence ~= (118) 证明
+(26) Expectation ~= (115) 预期
+(27) Coming_up_with ~= (42) 发明
+(28) Judgment ~= (250) 传达评价
+(29) Mental_property ~= (230) 心理刺激
+(31) Scrutiny ~= (283) 寻找
+(32) Candidness ~= (3) 陈述 
+(33) No match found for Commitment
+(34) Discussion ~= (3) 陈述 
+(35) Encoding ~= (3) 陈述 
+(36) No match found for Gesture
+(37) No match found for Hearsay
+(38) Communication_manner ~= (6) 发声
+(39) Communication_noise ~= (6) 发声
+(40) Questioning ~= (270) 询问
+(41) Request ~= (3) 陈述 
+(42) No match found for Communication_response
+(43) Statement ~= (3) 陈述 
+(44) No match found for Volubility
+(45) No match found for Emotion_active
+(46) Emotion_directed ~= (230) 心理刺激
+(47) Experiencer_obj ~= (230) 心理刺激
+(48) Experiencer_focus ~= (76) 情感体验
+(49) No match found for Emotion_heat
+(50) No match found for Cure
+(51) Recovery ~= (122) 行为重启
+(52) No match found for Health_response
+(53) Death ~= (90) 死亡
+(54) Arriving ~= (40) 到达
+(55) Cause_motion ~= (195) 使位移
+(56) Cotheme ~= (127) 追随
+(57) Departing ~= (100) 行为开始
+(58) Emptying ~= (227) 清空
+(59) Filling ~= (234) 填充
+(60) No match found for Motion_noise
+(61) No match found for Path_shape
+(62) Placing ~= (46) 放置
+(63) No match found for Removing
+(64) No match found for Self_motion
+(65) No match found for Operate_vehicle
+(66) Perception_active ~= (29) 自主感知
+(67) Give_impression ~= (93) 外观
+(68) Perception_body ~= (19) 身体感知
+(69) Make_noise ~= (6) 发声
+(70) Perception_experience ~= (9) 非自主感知
+(71) Sensation ~= (10) 感受
+(72) Change_of_leadership ~= (120) 职权变更
+(73) No match found for Leadership
+(74) No match found for Sociability
+(75) No match found for Strictness
+(76) Distributed_position ~= (234) 填充
+(77) Cause_expansion ~= (194) 使伸缩
+(78) No match found for Containers
+(79) Duration_description ~= (268) 过程持续
+(80) No match found for Frequency
+(81) Relative_time ~= (127) 追随
+(82) Commerce_scenario ~= (207) 商业情境
+(83) No match found for Expensiveness
+(84) No match found for Frugality
+(85) No match found for Wealthiness
+(87) Attempt_suasion ~= (195) 使位移
+(88) Eventive_affecting ~= (253) 杀害
+(89) Suasion ~= (290) 劝服
+(90) No match found for Talking_into
+(91) Change_position_on_a_scale ~= (15) 量变
+(92) Manipulate_into_doing ~= (27) 诈骗
+(93) Hostile_encounter ~= (117) 造成伤害
+(94) Theft ~= (5) 盗窃
+(95) No match found for Position_on_a_scale
+(96) Cause_change_of_position_on_a_scale ~= (15) 量变
+(98) No match found for Eventive_cognizer_affecting
+(99) Robbery ~= (282) 抢劫
+(102) No match found for Personal_relationship
+(103) Aggregate ~= (197) 使结合
+(104) No match found for Kinship
+(105) Location_of_light ~= (41) 发光
+(106) No match found for Gizmo
+(107) Examination ~= (74) 评定
+(108) Dimension ~= (74) 评定
+(110) Residence ~= (59) 居住
+(111) Education_teaching ~= (56) 教育教学
+(112) Cause_harm ~= (117) 造成伤害
+(114) No match found for Likelihood
+(115) Catastrophe ~= (295) 文本
+(116) Attempt ~= (269) 目的
+(117) Compliance ~= (210) 依从
+(118) Possession ~= (112) 拥有
+(119) No match found for Body_parts
+(120) No match found for Arraignment
+(121) Bail_decision ~= (46) 放置
+(122) Kidnapping ~= (252) 绑架
+(123) No match found for Piracy
+(124) No match found for Activity
+(125) No match found for Social_event
+(126) No match found for Hair_configuration
+(127) No match found for Rape
+(128) No match found for Type
+(129) Notification_of_charges ~= (250) 传达评价
+(130) No match found for Entering_of_plea
+(131) Light_movement ~= (41) 发光
+(132) Instance ~= (246) 实例
+(133) Process_start ~= (100) 行为开始
+(134) No match found for Clothing
+(135) Memory ~= (13) 记忆
+(136) No match found for Expertise
+(138) No match found for Arson
+(139) Giving ~= (48) 给予
+(140) No match found for Part_whole
+(141) Certainty ~= (95) 相信
+(142) No match found for Part_piece
+(143) Part_orientational ~= (275) 承租
+(144) Process_stop ~= (105) 行为绝对终止
+(145) Process_continue ~= (57) 行为进行
+(146) Activity_start ~= (100) 行为开始
+(147) No match found for Measure_mass
+(148) No match found for Process_resume
+(150) No match found for State
+(152) No match found for Process_initial_state
+(153) No match found for Process_stopped_state
+(154) No match found for Measure_linear_extent
+(155) Measure_volume ~= (46) 放置
+(156) No match found for Measure_area
+(157) Body_description_holistic ~= (189) 体型特征
+(158) No match found for Accoutrements
+(159) Grooming ~= (75) 清洁
+(160) No match found for Wearing
+(161) No match found for Facial_expression
+(164) Activity_ongoing ~= (57) 行为进行
+(165) Activity_finish ~= (101) 行为完成
+(166) Activity_stop ~= (105) 行为绝对终止
+(167) Activity_pause ~= (103) 行动相对中止
+(168) No match found for Activity_abandoned_state
+(169) No match found for Activity_ready_state
+(170) Activity_prepare ~= (99) 行为准备就绪状态
+(171) No match found for Commerce_buy
+(172) Commerce_sell ~= (303) 出售
+(173) No match found for Buildings
+(175) No match found for Smuggling
+(177) No match found for Commercial_transaction
+(178) No match found for Transfer
+(179) Getting ~= (52) 获得
+(180) Commerce_pay ~= (206) 付款
+(181) No match found for Activity_paused_state
+(182) No match found for Activity_done_state
+(184) No match found for Dynamic_situation_scenario
+(185) No match found for Event_initial_state
+(186) No match found for Event_endstate
+(187) No match found for Event
+(188) No match found for Building_subparts
+(189) Quantified_mass ~= (234) 填充
+(191) No match found for Natural_features
+(192) No match found for Locale
+(193) No match found for Biological_area
+(194) No match found for Clothing_parts
+(195) No match found for Political_locales
+(196) No match found for Locale_by_use
+(197) Attaching ~= (69) 联想
+(198) Intentionally_act ~= (114) 有意行为
+(199) No match found for Locative_relation
+(200) No match found for Criminal_process
+(201) No match found for Trial
+(202) Arrest ~= (4) 逮捕
+(203) No match found for Roadways
+(206) No match found for Lose_possession
+(207) No match found for Pre_lose_possession
+(208) No match found for Post_lose_possession
+(209) No match found for Commerce_money-transfer
+(210) No match found for Commerce_collect
+(211) No match found for Commerce_goods-transfer
+(212) No match found for Lose_possession_scenario
+(213) No match found for Addiction
+(214) Intoxication ~= (70) 迷醉
+(215) No match found for Direction
+(216) Rewards_and_punishments ~= (281) 奖励与惩罚
+(217) No match found for Causation_scenario
+(218) No match found for Cardinal_numbers
+(219) Judgment_communication ~= (250) 传达评价
+(221) Name_conferral ~= (32) 命名
+(222) No match found for Corporal_punishment
+(223) No match found for Fining
+(224) No match found for Measure_duration
+(225) Execution ~= (253) 杀害
+(226) No match found for Asymmetric_reciprocality
+(227) No match found for Symmetrical_collective_reciprocality
+(228) Being_named ~= (32) 命名
+(229) No match found for Calendric_unit
+(230) Intentionally_affect ~= (114) 有意行为
+(232) Process_end ~= (101) 行为完成
+(233) No match found for Process
+(234) No match found for Process_completed_state
+(235) No match found for Body_description_part
+(236) Apply_heat ~= (82) 使状态发生变化
+(237) No match found for Bounded_entity
+(238) No match found for Motion_scenario
+(239) Medical_conditions ~= (230) 心理刺激
+(240) Bringing ~= (26) 运送
+(241) No match found for Competition
+(242) Communication_means ~= (32) 命名
+(243) Sending ~= (253) 杀害
+(244) No match found for Fullness
+(245) Inhibit_movement ~= (245) 限制行动
+(246) Rope_manipulation ~= (185) 接合
+(247) Knot_creation ~= (185) 接合
+(248) No match found for Relation
+(250) No match found for Immobilization
+(251) No match found for Entity
+(252) Make_cognitive_connection ~= (69) 联想
+(253) Social_connection ~= (69) 联想
+(254) Closure ~= (47) 封闭
+(255) No match found for Medical_professionals
+(256) No match found for Medical_specialties
+(257) No match found for Medical_instruments
+(258) No match found for Accompaniment
+(259) Building ~= (191) 构建
+(260) Gathering_up ~= (197) 使结合
+(261) No match found for Commemorative
+(262) No match found for Abounding_with
+(263) Ingestion ~= (79) 摄取
+(264) No match found for Sleep
+(265) No match found for Cutting
+(266) Bungling ~= (17) 破坏
+(267) Dispersal ~= (86) 使分散
+(268) No match found for Cooking_creation
+(269) Seeking ~= (283) 寻找
+(270) Excreting ~= (79) 摄取
+(271) Chemical-sense_description ~= (10) 感受
+(272) No match found for Breathing
+(273) No match found for Escaping
+(274) No match found for Avoiding
+(275) No match found for Evading
+(276) Cause_to_move_in_place ~= (45) 方向改变
+(277) No match found for Food
+(278) Text_creation ~= (3) 陈述 
+(279) Reading_perception ~= (273) 阅读
+(280) Intentionally_create ~= (42) 发明
+(281) No match found for Giving_birth
+(282) Being_employed ~= (85) 受雇
+(283) Setting_fire ~= (100) 行为开始
+(284) No match found for Mass_motion
+(285) No match found for Silencing
+(286) Contacting ~= (32) 命名
+(287) Prevarication ~= (3) 陈述 
+(288) No match found for Cause_to_experience
+(289) No match found for Shoot_projectiles
+(290) No match found for Use_firearm
+(292) No match found for Fall_asleep
+(293) No match found for Cause_to_wake
+(294) No match found for Sleep_wake_cycle
+(295) No match found for Waking_up
+(296) No match found for Jury_deliberation
+(297) No match found for Sentencing
+(298) Text ~= (295) 文本
+(299) No match found for Body_decoration
+(300) No match found for Predicament
+(301) Rite ~= (261) 许可
+(302) No match found for Physical_entity
+(303) No match found for Weather
+(304) No match found for People
+(305) No match found for Attention_getting
+(306) Becoming_attached ~= (185) 接合
+(307) No match found for Being_attached
+(308) Reasoning ~= (118) 证明
+(309) No match found for Cause_to_be_wet
+(310) No match found for Dead_or_alive
+(311) Impact ~= (117) 造成伤害
+(313) Detaining ~= (60) 拘留
+(314) No match found for Precipitation
+(316) Coming_to_be ~= (107) 形成
+(317) No match found for Releasing
+(318) Verdict ~= (7) 发现 
+(319) Creating ~= (214) 创造
+(320) No match found for Try_defendant
+(321) No match found for Employment_scenario
+(322) Hiring ~= (275) 承租
+(323) No match found for Employing
+(324) No match found for Get_a_job
+(325) Quitting ~= (105) 行为绝对终止
+(326) Firing ~= (101) 行为完成
+(327) No match found for Part_inner_outer
+(328) No match found for Shapes
+(329) No match found for Boundary
+(330) No match found for Part_edge
+(331) No match found for Part_ordered_segments
+(332) No match found for Being_wet
+(333) No match found for Soaking
+(334) No match found for Cause_temperature_change
+(335) Cause_change_of_phase ~= (82) 使状态发生变化
+(336) Change_of_phase ~= (82) 使状态发生变化
+(337) No match found for Cause_to_be_dry
+(338) No match found for Being_dry
+(339) Preserving ~= (307) 保留
+(340) No match found for Rotting
+(341) Change_of_consistency ~= (46) 放置
+(342) Sufficiency ~= (99) 行为准备就绪状态
+(343) No match found for Travel
+(344) Reshaping ~= (128) 姿势变化
+(345) No match found for Fluidic_motion
+(346) No match found for Being_rotted
+(347) No match found for Revenge
+(348) No match found for Corroding
+(349) Partiality ~= (16) 偏向性
+(350) No match found for Corroding_caused
+(351) No match found for Grinding
+(352) Choosing ~= (91) 挑选
+(353) Evaluative_comparison ~= (292) 适宜性
+(354) No match found for Desirability
+(355) No match found for Sole_instance
+(356) No match found for Beyond_compare
+(357) No match found for Ground_up
+(358) No match found for Surpassing
+(359) Emitting ~= (41) 发光
+(360) Compatibility ~= (292) 适宜性
+(361) Emanating ~= (41) 发光
+(362) Motion_directional ~= (113) 有向位移
+(363) Deciding ~= (61) 决定
+(364) Stimulus_focus ~= (76) 情感体验
+(365) Businesses ~= (311) 储存
+(366) Desiring ~= (64) 渴望
+(368) Suitability ~= (292) 适宜性
+(369) No match found for Social_behavior_evaluation
+(370) Morality_evaluation ~= (219) 情感反应
+(372) Social_interaction_evaluation ~= (76) 情感体验
+(373) Topic ~= (297) 话题
+(374) No match found for Daring
+(375) No match found for Difficulty
+(376) No match found for Fairness_evaluation
+(377) No match found for Inclination
+(378) No match found for Run_risk
+(379) Time_vector ~= (127) 追随
+(380) No match found for Custom
+(381) Cause_to_start ~= (42) 发明
+(382) No match found for Contrition
+(383) Cause_change_of_consistency ~= (46) 放置
+(384) Experience_bodily_harm ~= (117) 造成伤害
+(385) No match found for Substance_by_phase
+(386) No match found for Ingest_substance
+(387) Prison ~= (267) 监狱
+(388) No match found for Atonement
+(390) No match found for Intoxicants
+(391) Assistance ~= (97) 协助
+(392) No match found for Being_obligated
+(393) No match found for Body_mark
+(394) Biological_urge ~= (64) 渴望
+(395) Cause_impact ~= (253) 杀害
+(396) Feeling ~= (10) 感受
+(397) Containing ~= (30) 包含
+(399) No match found for Praiseworthiness
+(400) No match found for Reparation
+(401) No match found for Forgiveness
+(402) No match found for First_rank
+(403) Achieving_first ~= (7) 发现 
+(404) No match found for Word_relations
+(405) No match found for Performing_arts
+(406) Linguistic_meaning ~= (312) 迹象
+(407) Importance ~= (264) 重视
+(408) Manufacturing ~= (214) 创造
+(409) Behind_the_scenes ~= (42) 发明
+(410) Taking ~= (91) 挑选
+(411) No match found for Receiving
+(412) Omen ~= (312) 迹象
+(413) Performers_and_roles ~= (39) 存现
+(414) No match found for Cause_to_fragment
+(415) No match found for Damaging
+(416) No match found for Render_nonfunctional
+(417) Destroying ~= (17) 破坏
+(418) No match found for Collaboration
+(419) Connectors ~= (69) 联想
+(420) No match found for Isolated_places
+(421) No match found for Artifact
+(422) No match found for Import_export_scenario
+(423) No match found for Color
+(424) Attack ~= (250) 传达评价
+(425) Predicting ~= (115) 预期
+(426) No match found for Weapon
+(428) Sign ~= (312) 迹象
+(429) No match found for Vehicle
+(430) No match found for Domain
+(432) Offenses ~= (259) 违法行为
+(470) Bearing_arms ~= (26) 运送
+(480) Hindering ~= (210) 依从
+(481) Similarity ~= (67) 类似
+(482) Abusing ~= (247) 侮辱诽谤
+(483) Reporting ~= (3) 陈述 
+(485) Hit_target ~= (253) 杀害
+(491) Conduct ~= (114) 有意行为
+(500) Criminal_investigation ~= (108) 研究
+(501) No match found for Legality
+(502) No match found for Surrendering
+(503) No match found for Suspicion
+(504) Appeal ~= (182) 上诉
+(505) No match found for Want_suspect
+(507) No match found for Court_examination
+(512) Justifying ~= (3) 陈述 
+(513) Purpose ~= (269) 目的
+(514) No match found for Reason
+(516) Preventing_or_letting ~= (261) 许可
+(517) No match found for Severity_of_offense
+(518) No match found for Thwarting
+(519) Assessing ~= (74) 评定
+(520) Deny_or_grant_permission ~= (261) 许可
+(521) Prohibiting_or_licensing ~= (261) 许可
+(523) Speak_on_topic ~= (3) 陈述 
+(530) No match found for Subordinates_and_superiors
+(531) No match found for Being_questionable
+(541) Deserving ~= (32) 命名
+(550) Claim_ownership ~= (32) 命名
+(560) Documents ~= (295) 文本
+(563) No match found for Fighting_activity
+(590) Killing ~= (253) 杀害
+(602) Amounting_to ~= (181) 共计
+(620) No match found for Processing_materials
+(621) Adding_up ~= (181) 共计
+(631) No match found for Endangering
+(652) Eclipse ~= (46) 放置
+(660) Existence ~= (39) 存现
+(670) Moving_in_place ~= (45) 方向改变
+(681) No match found for Pardon
+(683) Cause_change ~= (14) 经历变化
+(690) Ride_vehicle ~= (91) 挑选
+(691) No match found for Change_event_time
+(692) No match found for Crime_scenario
+(700) No match found for Committing_crime
+(710) No match found for Quarreling
+(711) No match found for Judgment_direct_address
+(720) Cognitive_connection ~= (69) 联想
+(723) Forming_relationships ~= (185) 接合
+(724) No match found for Stinginess
+(725) Expansion ~= (194) 使伸缩
+(726) Usefulness ~= (299) 适用性
+(730) Come_together ~= (197) 使结合
+(731) No match found for Becoming_silent
+(750) Telling ~= (3) 陈述 
+(770) Change_posture ~= (128) 姿势变化
+(790) Amalgamation ~= (197) 使结合
+(791) Attention ~= (124) 注意
+(792) Locating ~= (7) 发现 
+(793) No match found for Being_born
+(794) Making_faces ~= (72) 面部表情
+(796) Communicate_categorization ~= (3) 陈述 
+(797) No match found for Change_of_temperature
+(798) Finish_competition ~= (69) 联想
+(801) Cause_to_make_noise ~= (6) 发声
+(810) No match found for Measure_by_action
+(820) No match found for Friction
+(830) No match found for Absorb_heat
+(850) Sounds ~= (10) 感受
+(860) No match found for Sound_movement
+(870) No match found for Employment_start
+(871) No match found for Employment_continue
+(872) No match found for Employment_end
+(880) Being_in_operation ~= (253) 杀害
+(900) Contingency ~= (109) 依靠
+(901) Reliance ~= (109) 依靠
+(902) No match found for Reliance_on_expectation
+(910) Chatting ~= (203) 交谈
+(920) No match found for Cause_fluidic_motion
+(921) No match found for Arranging
+(950) No match found for Law
+(960) Being_located ~= (188) 位置
+(962) Practice ~= (265) 练习
+(964) No match found for Attributes
+(965) Measurable_attributes ~= (189) 体型特征
+(966) No match found for Speed_description
+(967) Taking_time ~= (91) 挑选
+(970) No match found for Shaped_part
+(971) No match found for Architectural_part
+(972) No match found for Age
+(973) No match found for People_by_age
+(974) No match found for People_by_origin
+(978) No match found for Losing_it
+(979) Grasp ~= (68) 理解
+(981) No match found for Craft
+(982) No match found for Idiosyncrasy
+(990) No match found for Capability
+(1000) No match found for Rest
+(1001) No match found for Increment
+(1010) No match found for Partitive
+(1012) Evoking ~= (13) 记忆
+(1015) No match found for Gradable_attributes
+(1016) No match found for Aesthetics
+(1017) No match found for Noise_makers
+(1019) Religious_belief ~= (130) 宗教信仰
+(1021) No match found for People_by_religion
+(1023) No match found for People_by_jurisdiction
+(1024) Halt ~= (105) 行为绝对终止
+(1025) No match found for Connecting_architecture
+(1026) Membership ~= (257) 成员
+(1027) No match found for First_experience
+(1029) No match found for Identicality
+(1030) No match found for Remainder
+(1040) No match found for Temporal_pattern
+(1041) No match found for Left_to_do
+(1050) No match found for Temperature
+(1052) No match found for Ambient_temperature
+(1054) No match found for Heralding
+(1060) Cause_to_continue ~= (57) 行为进行
+(1061) No match found for Employee_scenario
+(1062) No match found for Employer_scenario
+(1070) Transition_to_state ~= (107) 形成
+(1071) No match found for People_by_vocation
+(1080) No match found for Performers
+(1081) Spelling_and_pronouncing ~= (3) 陈述 
+(1083) Subjective_influence ~= (65) 客观影响
+(1084) Objective_influence ~= (65) 客观影响
+(1085) Make_acquaintance ~= (116) 因果
+(1086) No match found for Clemency
+(1088) No match found for Commutation
+(1090) Subversion ~= (17) 破坏
+(1100) No match found for Misdeed
+(1102) No match found for People_by_morality
+(1103) No match found for Origin
+(1110) No match found for Guilt_or_innocence
+(1111) Imprisonment ~= (193) 引起关押
+(1121) Replacing ~= (277) 取代
+(1130) No match found for Studying
+(1131) No match found for Exclude_member
+(1132) Memorization ~= (56) 教育教学
+(1133) No match found for Distinctiveness
+(1134) No match found for Typicality
+(1141) Using ~= (301) 使用
+(1143) No match found for People_by_residence
+(1144) Participation ~= (275) 承租
+(1145) No match found for Secrecy_status
+(1146) Reveal_secret ~= (3) 陈述 
+(1147) No match found for Ordinal_numbers
+(1148) No match found for Attributed_information
+(1149) No match found for Cause_to_end
+(1151) No match found for Sign_agreement
+(1152) No match found for Research
+(1153) Inclusion ~= (30) 包含
+(1154) No match found for Unattributed_information
+(1155) No match found for State_continue
+(1156) No match found for Activity_resume
+(1157) No match found for Being_necessary
+(1158) Project ~= (106) 行为准备
+(1159) No match found for Degree_of_processing
+(1160) No match found for Basis_for_attribute
+(1161) No match found for Source_path_goal
+(1163) No match found for Toxic_substance
+(1164) No match found for Being_obligatory
+(1170) Exchange ~= (277) 取代
+(1171) Take_place_of ~= (277) 取代
+(1172) Undergo_change ~= (277) 取代
+(1173) Change_tool ~= (277) 取代
+(1174) No match found for Containment_scenario
+(1176) No match found for Being_contained_within
+(1177) No match found for Goal
+(1178) No match found for Interior_profile_relation
+(1180) No match found for Receiving_scenario
+(1181) No match found for Pre_receiving
+(1182) No match found for Post_receiving
+(1183) No match found for Pre_getting
+(1184) Exchange_currency ~= (277) 取代
+(1185) No match found for Post_getting
+(1186) No match found for Pre_giving
+(1187) No match found for Post_giving
+(1188) No match found for Pre_transfer
+(1189) No match found for Post_transfer
+(1190) No match found for Giving_scenario
+(1191) No match found for Getting_scenario
+(1192) No match found for Transfer_scenario
+(1200) No match found for Being_operational
+(1210) Undressing ~= (253) 杀害
+(1211) No match found for Dressing
+(1220) Remembering_information ~= (13) 记忆
+(1221) Remembering_to_do ~= (13) 记忆
+(1222) Remembering_experience ~= (13) 记忆
+(1230) Verification ~= (50) 核实
+(1231) No match found for Renunciation
+(1250) Labeling ~= (32) 命名
+(1252) No match found for Namesake
+(1253) Referring_by_name ~= (32) 命名
+(1260) No match found for Simple_name
+(1261) Simple_naming ~= (32) 命名
+(1262) Inspecting ~= (34) 查看
+(1263) Scouring ~= (282) 抢劫
+(1271) No match found for Sharpness
+(1281) No match found for Change_of_phase_scenario
+(1291) No match found for Cause_to_be_sharp
+(1301) No match found for Operational_testing
+(1302) No match found for Response
+(1303) No match found for Dodging
+(1304) No match found for Forgoing
+(1305) No match found for Elusive_goal
+(1306) Taking_sides ~= (92) 同意
+(1310) Traversing ~= (38) 穿越
+(1321) No match found for Substance
+(1322) No match found for Active_substance
+(1330) Defending ~= (307) 保留
+(1340) Progression ~= (199) 使发展
+(1341) Stage_of_progress ~= (43) 发展阶段
+(1342) No match found for Make_agreement_on_action
+(1344) No match found for Delivery
+(1345) No match found for Fields
+(1346) Supply ~= (294) 提供
+(1347) No match found for Source_of_getting
+(1348) No match found for Ingredients
+(1349) Cause_to_make_progress ~= (199) 使发展
+(1350) No match found for Range
+(1351) No match found for Ratification
+(1360) Obviousness ~= (23) 鲜明性
+(1370) No match found for Extradition
+(1371) Organization ~= (69) 联想
+(1372) No match found for Cause_to_resume
+(1375) No match found for Needing
+(1376) No match found for Adjusting
+(1377) No match found for Rank
+(1378) No match found for Reassuring
+(1379) No match found for Occupy_rank
+(1380) No match found for Be_in_agreement_on_action
+(1381) No match found for Required_event
+(1383) No match found for Desirable_event
+(1387) No match found for Getting_vehicle_underway
+(1388) No match found for Success_or_failure
+(1389) No match found for Successful_action
+(1390) No match found for Detaching
+(1391) No match found for Becoming_detached
+(1400) Regard ~= (7) 发现 
+(1411) No match found for Being_detached
+(1412) Opinion ~= (12) 观点
+(1413) Resurrection ~= (15) 量变
+(1420) Getting_up ~= (15) 量变
+(1421) Dough_rising ~= (118) 证明
+(1430) Sidereal_appearance ~= (15) 量变
+(1440) No match found for Being_up_to_it
+(1441) Rising_to_a_challenge ~= (15) 量变
+(1460) No match found for Prominence
+(1461) No match found for Within_distance
+(1462) No match found for Explaining_the_facts
+(1470) Temporal_subregion ~= (100) 行为开始
+(1480) Seeking_to_achieve ~= (283) 寻找
+(1481) No match found for Infrastructure
+(1482) No match found for Amassing
+(1483) No match found for Foreign_or_domestic_country
+(1490) No match found for Relational_natural_features
+(1491) Have_as_requirement ~= (91) 挑选
+(1492) No match found for Requirement_scenario
+(1493) No match found for Obligation_scenario
+(1494) Imposing_obligation ~= (185) 接合
+(1495) No match found for Operating_a_system
+(1496) No match found for Be_in_agreement_on_assessment
+(1497) No match found for Giving_in
+(1500) No match found for Surrendering_possession
+(1510) No match found for Being_in_effect
+(1511) Store ~= (311) 储存
+(1512) No match found for Correctness
+(1513) Estimating ~= (46) 放置
+(1514) No match found for Military
+(1516) No match found for Estimated_value
+(1518) No match found for Withdraw_from_participation
+(1519) No match found for Accomplishment
+(1521) No match found for Submitting_documents
+(1522) No match found for Intercepting
+(1523) Resolve_problem ~= (297) 话题
+(1530) No match found for Redirecting
+(1531) No match found for Terms_of_agreement
+(1532) No match found for Used_up
+(1533) No match found for Ranked_expectation
+(1534) No match found for Completeness
+(1535) No match found for Electricity
+(1540) No match found for Being_active
+(1541) No match found for Installing
+(1542) Emphasizing ~= (264) 重视
+(1543) No match found for Convey_importance
+(1550) Storing ~= (311) 储存
+(1552) No match found for Indigenous_origin
+(1560) No match found for Being_at_risk
+(1561) No match found for Waiting
+(1562) No match found for Margin_of_resolution
+(1563) No match found for Level_of_force_exertion
+(1564) No match found for People_along_political_spectrum
+(1565) No match found for Ammunition
+(1566) No match found for Going_back_on_a_commitment
+(1567) No match found for Importing
+(1568) Exporting ~= (231) 出口
+(1570) No match found for Product_delivery
+(1571) No match found for Reforming_a_system
+(1572) No match found for Economy
+(1573) No match found for Extreme_point
+(1574) No match found for Alliance
+(1576) No match found for Holding_off_on
+(1577) No match found for Having_commercial_agreement
+(1578) No match found for Waver_between_options
+(1580) No match found for Actually_occurring_entity
+(1581) No match found for Rashness
+(1582) No match found for Proper_reference
+(1590) No match found for Adopt_selection
+(1591) Information ~= (244) 信息
+(1592) No match found for Path_traveled
+(1594) No match found for Continued_state_of_affairs
+(1596) No match found for Extreme_value
+(1597) Familiarity ~= (119) 知道
+(1598) No match found for Fastener
+(1599) No match found for Proliferating_in_number
+(1600) State_of_entity ~= (289) 实体状态
+(1601) Adducing ~= (3) 陈述 
+(1602) No match found for Abundance
+(1603) No match found for Scarcity
+(1604) No match found for Institutions
+(1605) No match found for Public_services
+(1606) No match found for Unemployment_rate
+(1607) No match found for Judicial_body
+(1608) Point_of_dispute ~= (270) 询问
+(1609) No match found for Sent_items
+(1610) No match found for System
+(1611) No match found for Network
+(1612) No match found for Disgraceful_situation
+(1614) Rejuvenation ~= (122) 行为重启
+(1615) No match found for Recording
+(1617) No match found for Set_of_interrelated_entities
+(1619) No match found for Expected_location_of_person
+(1620) No match found for Institutionalization
+(1621) No match found for Complaining
+(1622) No match found for Expressing_publicly
+(1623) Respond_to_proposal ~= (279) 回应提议
+(1624) No match found for Bragging
+(1625) Agree_or_refuse_to_act ~= (279) 回应提议
+(1626) No match found for Preference
+(1631) No match found for Protecting
+(1632) No match found for Willingness
+(1633) Board_vehicle ~= (100) 行为开始
+(1634) No match found for Disembarking
+(1641) No match found for Getting_underway
+(1642) Intentional_traversing ~= (15) 量变
+(1644) Quitting_a_place ~= (105) 行为绝对终止
+(1645) Translating ~= (14) 经历变化
+(1650) No match found for Setting_out
+(1652) No match found for Successfully_communicate_message
+(1653) Change_direction ~= (45) 方向改变
+(1654) No match found for Have_as_translation_equivalent
+(1655) No match found for Be_translation_equivalent
+(1656) Physical_artworks ~= (262) 艺术制品
+(1657) Create_representation ~= (195) 使位移
+(1658) No match found for Create_physical_artwork
+(1659) No match found for Fleeing
+(1660) No match found for Artificiality
+(1661) Forging ~= (233) 伪造
+(1670) No match found for Posing_as
+(1671) No match found for Passing_off
+(1672) No match found for Imitating
+(1673) No match found for Hiding_objects
+(1680) No match found for Delimitation_of_diversity
+(1681) No match found for Being_awake
+(1682) No match found for Result_of_attempt_scenario
+(1683) No match found for Attempting_and_resolving_scenario
+(1684) No match found for Scrutinizing_for
+(1685) No match found for Searching_scenario
+(1686) No match found for Measures
+(1687) No match found for Measure_scenario
+(1688) Change_operational_state ~= (253) 杀害
+(1689) No match found for Relation_between_individuals
+(1690) No match found for Use_vehicle
+(1700) No match found for Knot_creation_scenario
+(1710) No match found for Mental_activity
+(1712) No match found for Emotions
+(1722) Summarizing ~= (293) 总结
+(1724) No match found for Releasing_from_custody
+(1725) No match found for Undergoing
+(1726) No match found for Execute_plan
+(1727) No match found for Shooting_scenario
+(1728) Renting ~= (275) 承租
+(1729) Renting_out ~= (275) 承租
+(1731) Trust ~= (12) 观点
+(1733) No match found for Becoming_a_member
+(1734) No match found for Front_for
+(1750) No match found for Terrorism
+(1761) Money ~= (311) 储存
+(1762) No match found for Risky_situation
+(1763) No match found for Risk_scenario
+(1764) No match found for Process_uncompleted_state
+(1765) No match found for Process_pause
+(1770) Change_event_duration ~= (194) 使伸缩
+(1771) Thriving ~= (114) 有意行为
+(1781) No match found for Cause_change_of_strength
+(1782) No match found for Change_resistance
+(1790) No match found for Means
+(1792) Surviving ~= (39) 存现
+(1794) Colonization ~= (61) 决定
+(1795) No match found for Dominate_situation
+(1796) No match found for Dominate_competitor
+(1797) No match found for Domination
+(1799) No match found for Control
+(1800) No match found for Being_in_control
+(1801) No match found for Destiny
+(1811) No match found for Luck
+(1812) No match found for Coincidence
+(1813) No match found for Enforcing
+(1816) No match found for Removing_scenario
+(1817) No match found for Besieging
+(1818) No match found for Be_subset_of
+(1820) No match found for Being_in_category
+(1821) No match found for Inclusion_scenario
+(1822) No match found for Being_included
+(1823) No match found for Set_relation
+(1830) No match found for Wholes_and_parts
+(1840) No match found for Vocalizations
+(1850) Carry_goods ~= (26) 运送
+(1860) No match found for Breaking_off
+(1861) No match found for Fragmentation_scenario
+(1862) No match found for Breaking_apart
+(1863) No match found for Becoming_separated
+(1870) No match found for Having_or_lacking_access
+(1871) No match found for Access_scenario
+(1872) No match found for Openness
+(1873) Earnings_and_losses ~= (195) 使位移
+(1880) Fame ~= (32) 命名
+(1881) No match found for Obscurity
+(1882) No match found for Shopping
+(1883) No match found for Relational_political_locales
+(1884) No match found for Trendiness
+(1885) No match found for Temporary_stay
+(1890) No match found for Guest_and_host
+(1892) Work ~= (85) 受雇
+(1893) Diversity ~= (14) 经历变化
+(1894) No match found for Interrupt_process
+(1895) No match found for Temporal_collocation
+(1897) No match found for Simultaneity
+(1900) No match found for Attempt_distant_interaction_scenario
+(1901) Aiming ~= (269) 目的
+(1902) Hit_or_miss ~= (253) 杀害
+(1903) Accuracy ~= (253) 杀害
+(1904) No match found for Lively_place
+(1905) No match found for Cause_proliferation_in_number
+(1906) No match found for Individual_history
+(1907) Touring ~= (114) 有意行为
+(1908) No match found for Historic_event
+(1911) Visiting ~= (305) 拜访
+(1912) No match found for Visitor_scenario
+(1913) No match found for Visitor_arrival
+(1914) No match found for Visitor_departure
+(1916) No match found for Provide_lodging
+(1917) No match found for Lodging_scenario
+(1919) No match found for Aging
+(1921) No match found for Locale_by_event
+(1922) No match found for Presence
+(1923) No match found for Proportional_quantity
+(1924) No match found for Reference_text
+(1925) No match found for Appointing
+(1926) Nuclear_process ~= (180) 结合
+(1927) No match found for Scope
+(1928) No match found for Preliminaries
+(1930) No match found for Ineffability
+(1931) Alternatives ~= (91) 挑选
+(1933) Have_associated ~= (52) 获得
+(1940) No match found for Visit_host
+(1941) No match found for Visiting_scenario
+(1942) No match found for Visitor_and_host
+(1943) No match found for Visiting_scenario_arrival
+(1944) No match found for Visiting_scenario_departing
+(1945) No match found for Visiting_scenario_stay
+(1946) No match found for Drop_in_on
+(1947) No match found for Visit_host_arrival
+(1948) No match found for Visit_host_stay
+(1949) No match found for Visit_host_departure
+(1950) No match found for Receive_visitor_scenario
+(1951) No match found for Have_visitor_over
+(1960) No match found for Version_sequence
+(1970) No match found for Hospitality
+(2000) Supporting ~= (92) 同意
+(2001) No match found for Degree
+(2005) No match found for Medium
+(2006) No match found for Hunting
+(2007) No match found for Attempt_obtain_food_scenario
+(2008) No match found for Food_gathering
+(2009) No match found for Hunting_scenario
+(2010) No match found for Hunting_success_or_failure
+(2012) No match found for Agriculture
+(2014) No match found for Growing_food
+(2015) No match found for Planting
+(2016) No match found for Image_schema
+(2017) No match found for Proximity_image_schema
+(2018) No match found for Collocation_image_schema
+(2019) No match found for Bounded_region
+(2020) No match found for Alignment_image_schema
+(2021) No match found for Conquering
+(2022) No match found for Invading
+(2024) No match found for Contact_image_schema
+(2025) No match found for Invasion_scenario
+(2026) No match found for Repel
+(2027) No match found for Region_with_portal
+(2029) No match found for Becoming_dry
+(2030) Attending ~= (124) 注意
+(2031) No match found for Abandonment
+(2032) No match found for Soaking_up
+(2041) No match found for Cause_emotion
+(2042) No match found for Emotions_by_stimulus
+(2043) No match found for Emotions_success_or_failure
+(2044) Mental_stimulus_exp_focus ~= (230) 心理刺激
+(2045) Emotions_of_mental_activity ~= (10) 感受
+(2046) No match found for Mental_stimulus_stimulus_focus
+(2048) No match found for Others_situation_as_stimulus
+(2049) No match found for Annoyance
+(2050) No match found for Just_found_out
+(2051) No match found for Emotions_by_possibility
+(2052) Fear ~= (76) 情感体验
+(2054) No match found for Confronting_problem
+(2055) No match found for Dying
+(2056) Prevent_or_allow_possession ~= (261) 许可
+(2060) Relating_concepts ~= (185) 接合
+(2061) Level_of_force_resistance ~= (189) 体型特征
+(2070) No match found for Launch_process
+(2071) Passing ~= (48) 给予
+(2072) No match found for Win_prize
+(2074) No match found for Beat_opponent
+(2075) No match found for Punctual_perception
+(2076) Legal_rulings ~= (284) 判决
+(2080) No match found for Mention
+(2090) No match found for Indicating
+(2100) No match found for Cycle_of_existence_scenario
+(2102) No match found for Socially_significant_history_scenario
+(2104) Ceasing_to_be ~= (86) 使分散
+(2105) No match found for Out_of_existence
+(2106) No match found for Cycle_of_life_and_death
+(2110) No match found for History_scenario
+(2113) No match found for History
+(2120) No match found for Possibility
+(2121) No match found for Duration_relation
+(2122) No match found for Duration_scenario
+(2123) No match found for Delimited_state_scenario
+(2131) No match found for Tolerating
+(2132) No match found for Attempt_means
+(2133) No match found for Pattern
+(2135) No match found for Sequence
+(2136) No match found for Manipulate_into_shape
+(2137) No match found for Go_into_shape
+(2138) Capacity ~= (91) 挑选
+(2140) No match found for Event_instance
+(2141) No match found for Location_in_time
+(2142) No match found for Timespan
+(2150) No match found for Concessive
+(2161) Cause_to_perceive ~= (200) 使呈现
+(2162) No match found for Representing
+(2164) No match found for Labor_product
+(2170) No match found for Sound_level
+(2171) No match found for Locale_by_ownership
+(2180) No match found for Short_selling
+(2191) Turning_out ~= (118) 证明
+(2192) No match found for Dunking
+(2193) No match found for Finish_game
+(2196) No match found for Losing_someone
+(2197) No match found for Losing
+(2198) No match found for Losing_track_of
+(2199) No match found for Losing_track_of_theme
+(2200) No match found for Losing_track_of_perceiver
+(2201) No match found for Change_of_quantity_of_possession
+(2202) No match found for Reading_aloud
+(2220) No match found for Expend_resource
+(2221) No match found for Attempt_obtain_mineral_scenario
+(2230) No match found for Cause_to_be_included
+(2231) No match found for Response_scenario
+(2232) No match found for Meet_with_response
+(2233) No match found for Satisfying
+(2234) No match found for Arithmetic
+(2235) Meet_specifications ~= (292) 适宜性
+(2236) No match found for Arithmetic_non-commutative
+(2237) Assemble ~= (197) 使结合
+(2238) No match found for Meet_with
+(2239) Offering ~= (48) 给予
+(2241) No match found for Wagering
+(2243) No match found for Commutative_process
+(2244) No match found for Commutative_statement
+(2245) No match found for Arithmetic_commutative
+(2246) No match found for Non-commutative_process
+(2247) No match found for Non-commutative_statement
+(2248) No match found for Cause_to_rot
+(2249) No match found for Encounter
+(2251) No match found for Race_descriptor
+(2252) Exemplar ~= (8) 范畴化
+(2253) No match found for Exemplariness
+(2261) No match found for Optical_image
+(2262) No match found for Impression
+(2270) Color_qualities ~= (28) 知觉特征
+(2280) No match found for Social_event_individuals
+(2281) No match found for Social_event_collective
+(2282) No match found for Size
+(2284) No match found for Heat_potential
+(2285) No match found for Mining
+(2286) No match found for Subjective_temperature
+(2290) No match found for Time_period_of_action
+(2301) No match found for Container_focused_removing
+(2302) No match found for Placing_scenario
+(2303) No match found for Container_focused_placing
+(2320) Cause_bodily_experience ~= (19) 身体感知
+(2330) No match found for Tasting
+(2340) No match found for Trying_out
+(2350) No match found for Opportunity
+(2360) No match found for Probability
+(2370) No match found for Repayment
+(2371) No match found for Bond_maturation
+(2380) No match found for Popularity
+(2390) No match found for Appellations
+(2400) No match found for Exercising
+(2411) No match found for Personal_success
+(2421) No match found for Rate_description
+(2425) No match found for Rate_quantification
+(2426) No match found for Vehicle_subpart
+(2427) No match found for Relational_quantity
+(2430) No match found for Price_per_unit
+(2431) No match found for Proportion
+(2434) No match found for System_complexity
+(2440) No match found for Dynamism
+(2450) No match found for Influencing_potential
+(2451) No match found for Authority
+(2470) No match found for Artifact_subpart
+(2480) Using_resource ~= (301) 使用
+(2481) Erasing ~= (253) 杀害
+(2482) No match found for Political_actions
+(2490) No match found for Artistic_style
+(2500) No match found for Contrary_circumstances
+(2501) No match found for Leaving_traces
+(2502) Cognitive_impact ~= (253) 杀害
+(2510) No match found for Sports_jargon
+(2520) No match found for Graph_shape
+(2521) No match found for Serving_in_capacity
+(2523) No match found for Function
+(2524) No match found for Product_line
+(2530) No match found for Being_relevant
+(2542) No match found for Notability
+(2550) No match found for Thermodynamic_phase
+(2560) No match found for Subsisting
+(2562) No match found for Manner_of_life
+(2563) No match found for Manner
+(2564) No match found for Living_conditions
+(2566) No match found for Planned_trajectory
+(2567) No match found for Biological_entity
+(2569) No match found for Gusto
+(2570) No match found for Intentional_deception
+(2572) No match found for Fall_for
+(2573) No match found for Deception_success
+(2574) No match found for See_through
+(2575) No match found for Detonate_explosive
+(2576) No match found for Cache
+(2577) No match found for Explosion
+(2578) No match found for Trap
+(2579) No match found for Triggering
+(2582) No match found for Becoming_visible
+(2584) No match found for Rebellion
+(2585) No match found for Revolution
+(2586) No match found for Prank
+(2587) Protest ~= (118) 证明
+(2588) No match found for Temporary_group
+(2590) No match found for Business_closure
+(2591) No match found for Entourage
+(2592) No match found for Awareness_situation
+(2593) No match found for Awareness_status
+(2597) No match found for Convoy
+(2598) No match found for Irregular_combatants
+(2602) No match found for Armor
+(2603) No match found for Working_a_post
+(2604) No match found for Quantity
+(2611) No match found for Patrolling
+(2612) No match found for Circumscribed_existence
+(2613) No match found for Deception_scenario
+(2614) No match found for Deception_end
+(2615) No match found for Noncombatant
+(2616) Publishing ~= (296) 文本创作
+(2620) No match found for Locale_closure
+(2622) No match found for Endeavor_failure
+(2623) No match found for Improvised_explosive_device
+(2624) No match found for Victim_operated_IED
+(2625) No match found for Relational_location
+(2626) No match found for Locale_by_collocation
+(2627) No match found for Vehicle_departure_initial_stage
+(2628) No match found for Assigned_location
+(2630) No match found for Standing_by
+(2640) No match found for Getting_triggered
+(2641) No match found for Downing
+(2642) No match found for Vehicle_landing
+(2643) No match found for Cause_to_land
+(2644) No match found for Operate_vehicle_scenario
+(2645) No match found for Transportation_status
+(2651) No match found for Self_control
+(2653) No match found for Information_display
+(2654) No match found for Controller_object
+(2655) No match found for Government_institution
+(2656) No match found for Law_enforcement_agency
+(2657) No match found for Responsibility
+(2658) No match found for Suicide_attack
+(2659) No match found for Distant_operated_IED
+(2660) No match found for Social_desirability
+(2662) No match found for Firing_point
+(2663) No match found for Taking_captive
+(2664) No match found for Inhibit_motion_scenario
+(2665) Breaking_out_captive ~= (253) 杀害
+(2668) No match found for Specific_individual
+(2669) No match found for Commonality
+(2670) No match found for Member_of_military
+(2671) No match found for People_by_military_specialty
+(2672) No match found for Being_in_captivity
+(2673) Being_incarcerated ~= (267) 监狱
+(2674) No match found for Freeing_from_confinement
+(2675) No match found for Friendly_or_hostile
+(2676) No match found for Military_operation
+(2677) No match found for Counterattack
+(2678) No match found for Representative
+(2679) Reserving ~= (307) 保留
+(2680) No match found for Records
+(2682) Capital_stock ~= (311) 储存
+(2683) Experimentation ~= (297) 话题
+(2684) No match found for Fugitive
+(2685) No match found for Violence
+(2686) No match found for Change_accessibility
+(2687) No match found for Locale_by_characteristic_entity
+(2688) No match found for Make_compromise
+(2689) No match found for Sacrificing_for
+(2690) No match found for Product_development_scenario
+(2691) No match found for Product_development
+(2693) Ontogeny ~= (107) 形成
+(2700) No match found for Request_entity
+(2701) No match found for Biological_classification
+(2703) No match found for Precariousness
+(2705) No match found for Chaos
+(2708) No match found for Medical_interaction_scenario
+(2709) No match found for Temporary_leave
+(2712) Level_of_light ~= (28) 知觉特征
+(2713) No match found for Attitude_description
+(2714) No match found for Limiting
+(2715) No match found for Limitation
+(2716) No match found for Inherent_purpose
+(2717) No match found for Tool_purpose
+(2718) No match found for Condition_symptom_relation
+(2719) No match found for Mathematical_relationship
+(2720) No match found for Judgment_of_intensity
+(2721) No match found for Conferring_benefit
+(2722) No match found for Gradable_artistic_quality
+(2723) No match found for Be_on_alert
+(2724) No match found for Chemical_potency
+(2730) No match found for Warning
+(2740) No match found for Burying
+(2741) Medical_intervention ~= (30) 包含
+(2743) No match found for Key
+(2750) No match found for Biological_mechanisms
+(2770) Treating_and_mistreating ~= (301) 使用
+(2780) No match found for Temporary_transfer_scenario
+(2781) No match found for Lending
+(2783) No match found for Borrowing
+(2790) No match found for Locative_scenario
+(2800) Retaining ~= (307) 保留
+(2810) No match found for Sharing
+(2811) No match found for Birth_scenario
+(2820) No match found for Putting_out_fire
+(2821) No match found for Fire_stopping_scenario
+(2822) No match found for Fire_end_scenario
+(2823) No match found for Fire_going_out
+(2824) No match found for Fire_burning
+(2826) No match found for Cause_to_burn
+(2827) Catching_fire ~= (100) 行为开始
+(2828) No match found for Team
+(2829) No match found for Setting_back_burn
+(2830) No match found for Disaster_scenario
+(2831) No match found for Emergency
+(2832) No match found for Firefighting
+(2833) No match found for Fire_emergency_scenario
+(2835) No match found for Emergency_fire
+(2836) No match found for Reading_activity
+(2837) No match found for Fire_break
+(2838) No match found for Scheduling
+(2839) Making_arrangements ~= (42) 发明
+(2840) No match found for Animals
+(2841) No match found for Rescuing
+(2844) No match found for Timetable
+(2850) No match found for Plants
+(2851) Infecting ~= (48) 给予
+(2860) No match found for Negation
+(2880) No match found for Non-gradable_proximity
+(2890) Spatial_contact ~= (253) 杀害
+(2891) Adjacency ~= (44) 方位关系
+(2900) No match found for Gradable_proximity
+(2902) No match found for Conditional_scenario
+(2903) No match found for Conditional_occurrence
+(2904) No match found for Negative_conditional
+(2905) No match found for Spatial_co-location
+(2910) No match found for Preferred_alternative_scenario
+(2911) No match found for Surrounding
+(2912) No match found for Directional_locative_relation
+(2913) No match found for Sex
+(2914) No match found for Procreative_sex
+(2916) No match found for Distributed_abundance
+(2917) No match found for Sexual_reproduction_scenario
+(2921) No match found for Being_pregnant
+(2931) Come_into_effect ~= (301) 使用
+(2940) No match found for Location_on_path
+(2950) No match found for Alternativity
+(2960) No match found for Hedging
+(2961) No match found for Undergoing_scenario
+(2971) Becoming ~= (35) 成为
+(2972) No match found for Transition_to_a_quality
+(2973) Undergo_transformation ~= (14) 经历变化
+(2974) Affirm_or_deny ~= (118) 证明
+(2980) No match found for Transition_to_a_situation
+(2982) Funding ~= (92) 同意
+(2983) No match found for Billing
+(2984) No match found for Citing
+(2991) No match found for Presentation_of_mitigation
+(3000) No match found for Identity
+(3001) No match found for Identity_scenario
+(3011) No match found for Change_post-state
+(3012) Improvement_or_decline ~= (15) 量变
+(3013) No match found for Co-association
+(3015) No match found for Offshoot
+(3016) Come_down_with ~= (52) 获得
