@@ -1,0 +1,13 @@
+.graph-info {
+	font-size: 16px;
+}
+.graph-score {
+	text-anchor: end;
+}
+.match {
+	font-weight: bold!important;
+	fill: #109618;
+}
+.reference {
+	fill: #FF9900;
+}

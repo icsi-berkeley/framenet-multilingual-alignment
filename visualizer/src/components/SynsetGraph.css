@@ -1,0 +1,56 @@
+#synset-graph-content {
+	position: relative;
+}
+
+.node {
+	fill: #555;
+}
+.node.match,
+tspan.synset-matches {
+	font-weight: bold!important;
+	fill: #109618;
+}
+.node.ref,
+tspan.synset-references {
+	fill: #FF9900;
+}
+
+.synset-graph-info {
+	font-size: 16px;
+}
+.synset-graph-score {
+	text-anchor: end;
+}
+#synset-tooltip {
+	position: absolute;
+	width: 250px;
+	padding: 10px 8px;
+	background-color: rgba(255, 255, 255, 0.98);
+	border-radius: 4px;
+	border: 1px #666 solid;
+	box-shadow: 0 0 0.5rem 0 rgba(125,125,125,.25);
+	display: none;
+	font-size: 14px;
+	text-align: start;
+	color: #555;
+}
+
+#synset-l2-title {
+	margin-top: 6px;
+}
+
+.synset-lang-title {
+	font-weight: bold;
+	margin: 6px 0;
+}
+.synset-lang-title.large {
+	font-size: 18px;
+}
+
+.synset-lemma {
+	font-style: italic;
+}
+
+.synset-lemma.highlighted {
+	color: blue;
+}

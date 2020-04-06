@@ -1,0 +1,17 @@
+.checkbox-enable-input-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.checkbox-enabled-input-input-wrapper {
+	display: flex;
+	flex: 1;
+	margin-left: 24px;
+}
+
+.checkbox-enabled-input-input-wrapper > input {
+	flex: 1;
+	font-size: 14px;
+	height: 36px;
+	padding: 0 6px;
+}

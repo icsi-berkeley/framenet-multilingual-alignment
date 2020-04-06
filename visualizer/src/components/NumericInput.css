@@ -1,0 +1,10 @@
+.numeric-input-wrapper {
+	display: flex;
+}
+
+.numeric-input-wrapper > input {
+	flex: 1;
+	font-size: 14px;
+	height: 36px;
+	padding: 0 6px;
+}

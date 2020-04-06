@@ -1,0 +1,32 @@
+.sidebar-container {
+	padding: 16px;
+	box-shadow: 0 0 2rem 0 rgba(125,125,125,.25);
+	transition: all 100ms;
+}
+
+.multi-select-wrapper {
+	font-size: 12px;
+}
+.multi-select-wrapper > div {
+	min-width: 210px;
+}
+
+.sidebar-icon-container {
+	display: flex;
+	justify-content: flex-end;
+}
+.siderbar-icon-click-wrapper {
+	cursor: pointer;
+}
+
+div.sidebar-row {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+div.sidebar-row > div {
+	flex: 1;
+}
+div.sidebar-row > div:first-child {
+	margin-right: 36px;
+}
