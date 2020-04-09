@@ -2,7 +2,7 @@
   "name": "mlfn-alignment-visualizer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://arthurlorenzi.github.io/mlfn-alignment-visualizer/",
+  "homepage": "https://icsi-berkeley.github.io/framenet-multilingual-alignment/",
   "dependencies": {
     "@kenshooui/react-multi-select": "^1.1.5",
     "d3": "^4.13.0",
