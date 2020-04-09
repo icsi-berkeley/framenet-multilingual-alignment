@@ -315,7 +315,7 @@ def lu_mean_matching(alignment, en_emb, l2_emb):
 		else:
 			scores.append(0)
 
-	alignment.add_scores('lu_mean_muse', 'lu_mean_muse', scores, desc='MUSE LU centroid similarity')
+	alignment.add_scores('lu_mean_muse', 'lu_mean_muse', scores, desc='LU centroid similarity using MUSE')
 
 
 def fe_exact_matching(alignment, en_emb, l2_emb):
@@ -435,4 +435,4 @@ def def_matching(alignment, en_emb, l2_emb):
 		else:
 			scores.append(0)
 
-	alignment.add_scores('frame_def_muse', 'frame_def_muse', scores, desc='MUSE definition centroid similarity')
+	alignment.add_scores('frame_def_muse', 'frame_def_muse', scores, desc='FE centroid similarity using MUSE')
