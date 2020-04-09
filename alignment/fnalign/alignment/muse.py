@@ -435,4 +435,4 @@ def def_matching(alignment, en_emb, l2_emb):
 		else:
 			scores.append(0)
 
-	alignment.add_scores('frame_def_muse', 'frame_def_muse', scores, desc='FE centroid similarity using MUSE')
+	alignment.add_scores('frame_def_muse', 'frame_def_muse', scores, desc='Frame definition similarity using MUSE')
