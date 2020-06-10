@@ -1,0 +1,6 @@
+{
+	"python.pythonPath": "/home/arthur/anaconda3/envs/mlfn/bin/python",
+	"python.linting.pylintEnabled": true,
+	"python.linting.pycodestyleEnabled": false,
+	"python.linting.enabled": true
+}

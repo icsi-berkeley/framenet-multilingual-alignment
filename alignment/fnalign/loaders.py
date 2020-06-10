@@ -26,6 +26,8 @@ SWEFN_FE_TYPES = {
 	"peripheralElement": "Peripheral",
 }
 
+NS = "{http://framenet.icsi.berkeley.edu}"
+
 class FNLoader():
 	"""A class used to represent a FrameNet XML loader.
 
@@ -35,6 +37,7 @@ class FNLoader():
 
 	def __init__(self, db_name):
 		self.db_name = db_name
+		self.base_path = os.path.join("alignment", "data", self.db_name)
 
 	@staticmethod
 	def supported_db():
@@ -53,8 +56,12 @@ class FNLoader():
 		:returns: An iterator over :class:`xml.etree.ElementTree.Element`.
 		:rtype: Iterator[xml.etree.ElementTree.Element]
 		"""
-		path = os.path.join('data', self.db_name)
-		files = [os.path.join(path, p) for p in os.listdir(path) if p.endswith(".xml")]
+		path = os.path.join(self.base_path, "frame")
+
+		files = [
+			os.path.join(path, p)
+			for p in os.listdir(path) if p.endswith(".xml")
+		]
 
 		for filename in files:
 			yield ET.parse(filename).getroot()
@@ -96,7 +103,7 @@ class FNLoader():
 		:rtype: (str, str, str)
 		"""
 		name = root.get("name")
-		definition = self.parse_def(root.find("{http://framenet.icsi.berkeley.edu}definition"))
+		definition = self.parse_def(root.find(f"{NS}definition"))
 		return root.get("ID"), name, name, definition
 	
 	def parse_lus(self, root):
@@ -106,11 +113,32 @@ class FNLoader():
 
 		:param root: The frame's XML root tag.
 		:param type: xml.etree.ElementTree.Element
-		:returns: An iterator over lexical units id, name, and POS tag.
-		:rtype: Iterator[(str, str, str)]
+		:returns: An iterator over lexical units id, name, POS tag and annotated
+			sentences.
+		:rtype: Iterator[(str, str, str, list)]
 		"""
-		for el in root.findall("{http://framenet.icsi.berkeley.edu}lexUnit"):
-			yield el.get("ID"), el.get("name"), el.get("POS")
+		lu_base_path = os.path.join(self.base_path, "lu")
+
+		for el in root.findall(f"{NS}lexUnit"):
+			path = os.path.join(lu_base_path, f'lu{el.get("ID")}.xml')
+
+			try:
+				lu_root = ET.parse(path).getroot()
+				annotations = list()
+
+				for anno_set in lu_root.findall(f"{NS}subCorpus/{NS}sentence"):
+					sentence = anno_set.find(f'{NS}text').text
+					target = anno_set.find(f'{NS}annotationSet/{NS}layer[@name="Target"]/{NS}label[@name="Target"]')
+
+					annotations.append({
+						"sentence": sentence,
+						"lu_pos": (int(target.get("start")), int(target.get("end"))+1)
+					})
+
+				yield el.get("ID"), el.get("name"), el.get("POS"), annotations
+			except FileNotFoundError:
+				yield el.get("ID"), el.get("name"), el.get("POS"), list()
+
 
 	def parse_fes(self, root):
 		"""Yields all frame elements under ``root``. This method should be
@@ -154,8 +182,8 @@ class FNLoader():
 			frame = Frame(_id, name, name_en, self.db_name, lang, definition=definition)
 
 			frame.lus = set(
-				LexUnit(_id, name, pos)
-				for _id, name, pos in self.parse_lus(root)
+				LexUnit(_id, name, pos, anno_sents)
+				for _id, name, pos, anno_sents in self.parse_lus(root)
 			)
 
 			frame.fes = set(
@@ -226,7 +254,7 @@ class FNBrasilLoader(FNLoader):
 			return None
 
 	def frames(self):
-		filename = os.path.join("data", self.db_name, "data.xml")
+		filename = os.path.join(self.base_path, "data.xml")
 		root = ET.parse(filename).getroot()
 
 		for frm_node in root.findall("frame"):
@@ -237,8 +265,27 @@ class FNBrasilLoader(FNLoader):
 		return root.get("ID"), root.get("name"), None, definition
 
 	def parse_lus(self, root):
+		lu_base_path = os.path.join(self.base_path, "lus")
+
 		for el in root.find("lexunits").findall("lexunit"):
-			yield el.get("ID"), el.get("name"), el.get("pos")
+			path = os.path.join(lu_base_path, f'lu{el.get("ID")}.xml')
+
+			try:
+				lu_root = ET.parse(path).getroot()
+				annotations = list()
+
+				for anno_set in lu_root.iter('annotationSet'):
+					sentence = anno_set.find("sentence/text").text
+					target = anno_set.find('layers/layer[@name="Target"]/labels/label[@name="Target"]')
+
+					annotations.append({
+						"sentence": sentence,
+						"lu_pos": (int(target.get("start")), int(target.get("end")))
+					})
+
+				yield el.get("ID"), el.get("name"), el.get("pos"), annotations
+			except FileNotFoundError:
+				yield el.get("ID"), el.get("name"), el.get("pos"), list()
 
 	def parse_fes(self, root):
 		for el in root.find("fes").findall("fe"):
@@ -272,7 +319,7 @@ class SwedishFNLoader(FNLoader):
 		return lu, pos
 
 	def frames(self):
-		filename = os.path.join("data", self.db_name, "data.xml")
+		filename = os.path.join(self.base_path, "data.xml")
 		root = ET.parse(filename).getroot()
 
 		for le in root.find("Lexicon").findall("LexicalEntry"):
