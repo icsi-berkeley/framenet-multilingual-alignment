@@ -26,6 +26,8 @@ SWEFN_FE_TYPES = {
 	"peripheralElement": "Peripheral",
 }
 
+NS = '{http://framenet.icsi.berkeley.edu}'
+
 class FNLoader():
 	"""A class used to represent a FrameNet XML loader.
 
@@ -54,7 +56,7 @@ class FNLoader():
 		:returns: An iterator over :class:`xml.etree.ElementTree.Element`.
 		:rtype: Iterator[xml.etree.ElementTree.Element]
 		"""
-		path = os.path.join('data', self.db_name)
+		path = os.path.join(self.base_path, 'frame')
 		files = [os.path.join(path, p) for p in os.listdir(path) if p.endswith(".xml")]
 
 		for filename in files:
@@ -97,7 +99,7 @@ class FNLoader():
 		:rtype: (str, str, str)
 		"""
 		name = root.get("name")
-		definition = self.parse_def(root.find("{http://framenet.icsi.berkeley.edu}definition"))
+		definition = self.parse_def(root.find(f"{NS}definition"))
 		return root.get("ID"), name, name, definition
 	
 	def parse_lus(self, root):
@@ -107,14 +109,11 @@ class FNLoader():
 
 		:param root: The frame's XML root tag.
 		:param type: xml.etree.ElementTree.Element
-		:returns: An iterator over lexical units id, name, and POS tag.
-		:rtype: Iterator[(str, str, str)]
+		:returns: An iterator over lexical units id, name, POS tag, annotated sentences.
+		:rtype: Iterator[(str, str, str, str)]
 		"""
-		for el in root.findall("{http://framenet.icsi.berkeley.edu}lexUnit"):
-			yield el.get("ID"), el.get("name"), el.get("POS")
-
 		for el in root.findall(f"{NS}lexUnit"):
-			path = os.path.join(lu_base_path, f'lu{el.get("ID")}.xml')
+			path = os.path.join(self.base_path, 'lu', f'lu{el.get("ID")}.xml')
 
 			try:
 				lu_root = ET.parse(path).getroot()
@@ -146,8 +145,8 @@ class FNLoader():
 			abbreviation.
 		:rtype: Iterator[(str, str, str)]
 		"""
-		for el in root.findall("{http://framenet.icsi.berkeley.edu}FE"):
-			def_str = self.parse_def(el.find("{http://framenet.icsi.berkeley.edu}definition"))
+		for el in root.findall(f"{NS}FE"):
+			def_str = self.parse_def(el.find(f"{NS}definition"))
 			yield (el.get("ID"), el.get("name"), el.get("name"), el.get("coreType"),
 				el.get("abbrev"), def_str)
 
@@ -177,8 +176,8 @@ class FNLoader():
 			frame = Frame(_id, name, name_en, self.db_name, lang, definition=definition)
 
 			frame.lus = set(
-				LexUnit(_id, name, pos)
-				for _id, name, pos in self.parse_lus(root)
+				LexUnit(_id, name, pos, annotations)
+				for _id, name, pos, annotations in self.parse_lus(root)
 			)
 
 			frame.fes = set(
@@ -260,10 +259,27 @@ class FNBrasilLoader(FNLoader):
 		return root.get("ID"), root.get("name"), None, definition
 
 	def parse_lus(self, root):
-		lu_base_path = os.path.join(self.base_path, "lu")
-
 		for el in root.find("lexunits").findall("lexunit"):
-			yield el.get("ID"), el.get("name"), el.get("pos")
+			path = os.path.join(self.base_path, 'lu', f'lu{el.get("ID")}.xml')
+
+			try:
+				lu_root = ET.parse(path).getroot()
+				annotations = list()
+
+				for anno_set in lu_root.findall(f"subcorpus/annotationSet"):
+					sentence = anno_set.find(f'sentence/text').text
+					target = anno_set.find(f'layers/layer[@name="Target"]/labels/label[@name="Target"]')
+
+					if target:
+						annotations.append({
+							"sentence": sentence,
+							"lu_pos": (int(target.get("start")), int(target.get("end"))+1)
+						})
+
+				yield el.get("ID"), el.get("name"), el.get("pos"), annotations
+			except FileNotFoundError:
+				yield el.get("ID"), el.get("name"), el.get("pos"), list()
+
 
 	def parse_fes(self, root):
 		for el in root.find("fes").findall("fe"):

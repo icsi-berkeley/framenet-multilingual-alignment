@@ -110,12 +110,13 @@ class LexUnit:
 	databases.
 	"""
 
-	def __init__(self, _id, name, pos):
-		"""Initializes a :class:`LexUnit` object assigning its id, name, POS tag and 
-		the preprocessed name.
+	def __init__(self, _id, name, pos, annotations):
+		"""Initializes a :class:`LexUnit` object assigning its id, name, POS tag,
+		annotated sentences and the preprocessed name.
 		"""
 		self.id = _id
 		self.name = name
+		self.anno_sents = annotations
 		self.pos = pos.lower()
 
 		clean_name = name[:-1-len(pos)].lower()
