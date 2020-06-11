@@ -1,0 +1,86 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Extract features",
+      "type": "python",
+      "request": "launch",
+      "program": "${cwd}/extract_features.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--input_file=${cwd}/data/fastalign-europarl.pt-en",
+        "--output_file=${cwd}/data/fastalign-europarl.pt-en.features.json",
+        "--vocab_file=${cwd}/models/multi_cased_L-12_H-768_A-12/vocab.txt",
+        "--bert_config_file=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_config.json",
+        "--init_checkpoint=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_model.ckpt",
+        "--layers=-1",
+        "--max_seq_length=128",
+      ]
+    },
+    {
+      "name": "Create alignment data",
+      "type": "python",
+      "request": "launch",
+      "program": "${cwd}/create_alignment_data.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--input_sentence_file=${cwd}/data/fastalign-europarl.pt-en",
+        "--input_mapping_file=${cwd}/data/fastalign-europarl.pt-en.intersect.align",
+        "--vocab_file=${cwd}/models/multi_cased_L-12_H-768_A-12/vocab.txt",
+        "--bert_config_file=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_config.json",
+        "--init_checkpoint=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_model.ckpt",
+        "--output_file=${cwd}/data/256-1000-12345-fastalign-europarl.pt-en.tfrecord",
+        "--layers=-1",
+        "--do_lower_case=False",
+        "--max_seq_length=256",
+        "--sample_size=1000",
+        "--random_seed=12345"
+      ]
+    },
+    {
+      "name": "Run alignment",
+      "type": "python",
+      "request": "launch",
+      "program": "${cwd}/run_alignment.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--input_file=${cwd}/data/256-1000-12345-fastalign-europarl.pt-en.tfrecord",
+        "--output_dir=${cwd}/alignment_output",
+        "--do_train=True",
+        // "--do_eval=True",
+        "--bert_config_file=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_config.json",
+        "--init_checkpoint=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_model.ckpt",
+        "--train_batch_size=2",
+        "--max_seq_length=256",
+        "--num_train_steps=500",
+        "--num_warmup_steps=50",
+        "--learning_rate=5e-5",
+        "--lambda_coef=1"
+      ]
+    },
+    {
+      "name": "Create LU vectors",
+      "type": "python",
+      "request": "launch",
+      "program": "${cwd}/alignment/create_lu_vectors.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Main FrameNet alignment",
+      "type": "python",
+      "request": "launch",
+      "program": "${cwd}/alignment/main.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}

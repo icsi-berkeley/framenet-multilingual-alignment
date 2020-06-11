@@ -35,6 +35,7 @@ class FNLoader():
 
 	def __init__(self, db_name):
 		self.db_name = db_name
+		self.base_path = os.path.join("data", self.db_name)
 
 	@staticmethod
 	def supported_db():
@@ -111,6 +112,28 @@ class FNLoader():
 		"""
 		for el in root.findall("{http://framenet.icsi.berkeley.edu}lexUnit"):
 			yield el.get("ID"), el.get("name"), el.get("POS")
+
+		for el in root.findall(f"{NS}lexUnit"):
+			path = os.path.join(lu_base_path, f'lu{el.get("ID")}.xml')
+
+			try:
+				lu_root = ET.parse(path).getroot()
+				annotations = list()
+
+				for anno_set in lu_root.findall(f"{NS}subCorpus/{NS}sentence"):
+					sentence = anno_set.find(f'{NS}text').text
+					target = anno_set.find(f'{NS}annotationSet/{NS}layer[@name="Target"]/{NS}label[@name="Target"]')
+
+					if target:
+						annotations.append({
+							"sentence": sentence,
+							"lu_pos": (int(target.get("start")), int(target.get("end"))+1)
+						})
+
+				yield el.get("ID"), el.get("name"), el.get("POS"), annotations
+			except FileNotFoundError:
+				yield el.get("ID"), el.get("name"), el.get("POS"), list()
+
 
 	def parse_fes(self, root):
 		"""Yields all frame elements under ``root``. This method should be
@@ -237,6 +260,8 @@ class FNBrasilLoader(FNLoader):
 		return root.get("ID"), root.get("name"), None, definition
 
 	def parse_lus(self, root):
+		lu_base_path = os.path.join(self.base_path, "lu")
+
 		for el in root.find("lexunits").findall("lexunit"):
 			yield el.get("ID"), el.get("name"), el.get("pos")
 

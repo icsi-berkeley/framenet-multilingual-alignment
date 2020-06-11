@@ -266,5 +266,4 @@ dmypy.json
 # End of https://www.gitignore.io/api/linux,macos,python,pycharm,jupyternotebooks,visualstudiocode
 
 ### mlfn ###
-/data/
 /out/
