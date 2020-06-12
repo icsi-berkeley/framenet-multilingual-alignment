@@ -37,6 +37,7 @@ const ChartPanel = observer(
 				"synset_inv",
 				"lu_muse",
 				"fe_matching",
+				"lu_bert",
 			]
 		}
 
@@ -83,6 +84,7 @@ const ChartPanel = observer(
 
 				switch(uiState.scoring.type) {
 					case 'lu_muse':
+					case 'lu_bert':
 						return <LUMatchingGraph store={store} uiState={uiState} framePair={framePair} />;
 					case 'fe_matching':
 						return <FEMatchingGraph store={store} uiState={uiState} framePair={framePair} />;

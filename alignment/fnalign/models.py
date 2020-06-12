@@ -110,11 +110,12 @@ class LexUnit:
 	databases.
 	"""
 
-	def __init__(self, _id, name, pos, annotations):
-		"""Initializes a :class:`LexUnit` object assigning its id, name, POS tag,
-		annotated sentences and the preprocessed name.
+	def __init__(self, _id, gid, name, pos, annotations):
+		"""Initializes a :class:`LexUnit` object assigning id, global id, name,
+		POS tag, annotated sentences and the preprocessed name.
 		"""
 		self.id = _id
+		self.gid = gid
 		self.name = name
 		self.anno_sents = annotations
 		self.pos = pos.lower()
@@ -134,6 +135,7 @@ class FrameElement:
 	This is a simplified representation of a frame element that contains only a
 	set of attributes that are used for the multilingual alignment.
 	"""
+
 	def __init__(self, _id, name, name_en, etype, abbrev=None, definition=None):
 		"""Initializes a :class:`FrameElement` object assigning its id, name,
 		english name, type, name abbreviation and definition.
@@ -224,7 +226,10 @@ class Alignment():
 				"gid": frame.gid,
 				"name": frame.name,
 				"language": frame.lang,
-				"LUs": [l.name for l in frame.lus],
+				"LUs": [
+					{ "id": l.gid, "name": l.name }
+					for l in frame.lus
+				],
 				"FEs": [
 					{
 						"name": f.name,

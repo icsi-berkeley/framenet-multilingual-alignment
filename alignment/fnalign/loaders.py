@@ -176,7 +176,7 @@ class FNLoader():
 			frame = Frame(_id, name, name_en, self.db_name, lang, definition=definition)
 
 			frame.lus = set(
-				LexUnit(_id, name, pos, annotations)
+				LexUnit(_id, f'{frame.gid}.{_id}', name, pos, annotations)
 				for _id, name, pos, annotations in self.parse_lus(root)
 			)
 

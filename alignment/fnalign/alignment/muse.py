@@ -52,8 +52,8 @@ def lu_scores(alignment, lu_vecs, K, thres):
 	for _, row in alignment.frm.iterrows():
 		frame = row["obj"]
 		for lu in frame.lus:
-			if lu.name in vec_sets:
-				frm_vecs[frame.gid].update(vec_sets[lu.name])
+			if lu.gid in vec_sets:
+				frm_vecs[frame.gid].update(vec_sets[lu.gid])
 
 	# Scoring
 	scores = []
@@ -195,6 +195,47 @@ def fe_score(frame, other, def_vecs, name_vecs):
 	return sum(sims)/len(sims)
 
 
+def lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs, name='bert'):
+	""" TODO: This method should be the same as 'lu_matching'
+	"""
+	K = max(c[0] for c in scoring_configs)
+
+	search_idx = SearchIndex(
+		l2_emb.embeddings,
+		list(l2_emb.word2id.keys()),
+		l2_emb.dim,
+	)
+
+	# Including NN in l2 space of english LUs
+	lu_nn = {}
+
+	for _, row in alignment.l2_frm.iterrows():
+		for lu in row["obj"].lus:
+			if lu.id in search_idx.word2id:
+				lu_nn[lu.gid] = [(1, search_idx.word2id[lu.id])]
+
+	for _, row in alignment.en_frm.iterrows():
+		for lu in row["obj"].lus:
+			vec = en_emb.get_word_emb(lu.id)
+			if vec is not None:
+				lu_nn[lu.gid] = list(zip(*search_idx.get_knn(vec, K=K)))
+
+	alignment.resources['lu_vec_nn'] = lu_nn
+	alignment.resources['id2word'] = {int(i):search_idx.id2word[i] for k,v in lu_nn.items() for d, i in v}
+
+	if len(scoring_configs) == 1:
+		scores = lu_scores(alignment, lu_nn, scoring_configs[0][0], scoring_configs[0][1])
+		alignment.add_scores(f'lu_{name}', f'lu_{name}', scores, desc='LU translations using BERT')
+	else:
+		for c in scoring_configs:
+			scores = lu_scores(alignment, lu_nn, c[0], c[1])
+			alignment.add_scores(
+				f'lu_{name}_{c[0]}_{c[1]}', f'lu_{name}', scores,
+				desc=f'LU translations using BERT (K={c[0]}, Threshold={c[1]})',
+				K=c[0], threshold=c[1])
+
+
+
 def lu_matching(alignment, en_emb, l2_emb, scoring_configs, name="muse"):
 	"""Computes scores of each pair of frames on the alignment based on two
 	different aligned word embeddings.
@@ -259,13 +300,13 @@ def lu_matching(alignment, en_emb, l2_emb, scoring_configs, name="muse"):
 	for _, row in alignment.l2_frm.iterrows():
 		for lu in row["obj"].lus:
 			if lu.clean_name in search_idx.word2id:
-				lu_nn[lu.name] = [(1, search_idx.word2id[lu.clean_name])]
+				lu_nn[lu.gid] = [(1, search_idx.word2id[lu.clean_name])]
 
 	for _, row in alignment.en_frm.iterrows():
 		for lu in row["obj"].lus:
 			vec = en_emb.infer_vector(lu.clean_name)
 			if vec is not None:
-				lu_nn[lu.name] = list(zip(*search_idx.get_knn(vec, K=K)))
+				lu_nn[lu.gid] = list(zip(*search_idx.get_knn(vec, K=K)))
 
 	alignment.resources['lu_vec_nn'] = lu_nn
 	alignment.resources['id2word'] = {int(i):search_idx.id2word[i] for k,v in lu_nn.items() for d, i in v}

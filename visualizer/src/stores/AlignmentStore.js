@@ -40,6 +40,7 @@ const LU_SCORING_TYPES = new Set([
 	"synset",
 	"synset_inv",
 	"lu_muse",
+	"lu_bert",
 	"lu_mean_muse",
 ])
 
@@ -231,6 +232,7 @@ class AlignmentStore {
 			case 'synset_inv':
 				return this.synsetGraph();
 			case 'lu_muse':
+			case 'lu_bert':
 				return this.LUMuseGraph();
 			case 'fe_matching':
 				return this.FEMatchingGraph();
@@ -491,15 +493,13 @@ class AlignmentStore {
 	}
 
 	/**
-	 * Creates an object containing basic information of a graph node for
-	 * visualization based on the node name.
+	 * Creates an object containing default information of a graph node.
 	 * 
 	 * @public
 	 * @method
-	 * @param {string} name the name of the node.
 	 * @returns {Object} graph node object.
 	 */
-	createNode = name => ({ name: name, inDegree: 0, outDegree: 0, });
+	createNode = () => ({ inDegree: 0, outDegree: 0, });
 
 	/**
 	 * Returns the list of nodes of the selected frames distinguishing the source
@@ -511,22 +511,24 @@ class AlignmentStore {
 	 * @param {Func} nodeNameFn name getter for a graph node.
 	 * @returns {Array} list of LU nodes.
 	 */
-	getNodes(frameAttr = "LUs", nodeNameFn = x => x) {
+	getNodes(frameAttr = "LUs", nodeNameFn = x => x['name']) {
 		const {selectedFrames} = this.uiState;
 
 		if (selectedFrames[0] && selectedFrames[1]) {
 			return this.frames[selectedFrames[0]][frameAttr]
 				.map(x => ({
 					type: 'left',
-					...this.createNode(nodeNameFn(x)),
+					...this.createNode(),
 					...(typeof x === "object" ? x : null),
+					'name': nodeNameFn(x),
 				}))
 				.concat(
 					this.frames[selectedFrames[1]][frameAttr]
 					.map(x => ({
 						type: 'right',
-						...this.createNode(nodeNameFn(x)),
+						...this.createNode(),
 						...(typeof x === "object" ? x : null),
+						'name': nodeNameFn(x),
 					}))
 				);
 		} else {
@@ -553,7 +555,7 @@ class AlignmentStore {
 
 		const links = LUNodes
 			.flatMap(s =>
-				(relationMap[s.name] || [])
+				(relationMap[s.id] || [])
 					.slice(0, params.neighborhoodSize)
 					.filter(t => !Array.isArray(t) || t[0] > params.similarityThreshold)
 					.map(t => ({
@@ -568,7 +570,8 @@ class AlignmentStore {
 				.map(t => {
 					const node = {
 						type: 'intermediate',
-						...this.createNode(nodeNameFn(t))
+						...this.createNode(),
+						'name': nodeNameFn(t),
 					};
 					intermediateMap[t] = node;
 					return node;

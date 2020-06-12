@@ -5,11 +5,11 @@ global_time = time.time()
 from fnalign.loaders import load
 from fnalign.models import Alignment
 from fnalign.alignment import attribute, muse, wordnet
-from fnalign.embeddings import MuseWordEmbedding, BertWordEmbedding
+from fnalign.embeddings import MuseWordEmbedding, LUEmbedding
 
 MUSE_NMAX=200000
 MUSE_EMBS = {}
-BERT_EMBS = {}
+LU_EMBS = {}
 
 def get_muse_emb(lang, nmax=200000, cache=False):
 	"""Instantiates a new :class:`MuseWordEmbedding` with language ``lang`` when needed,
@@ -37,51 +37,43 @@ def get_muse_emb(lang, nmax=200000, cache=False):
 
 	return emb
 
-def get_bert_emb(lang, cache=True):
-	"""Instantiates a new :class:`BertWordEmbedding` with language ``lang`` when needed,
+def get_lu_emb(db_name, lang, cache=True):
+	"""Instantiates a new :class:`LUEmbedding` with language ``lang`` when needed,
 	otherwise retrieves one from cache.
 
+	:param lang: FrameNet database name.
+	:type lang: str
 	:param lang: Language of the embedding.
 	:type lang: str
 	:param cache: Whether getting an embedding from cache should be considered.
 	:type cache: bool
-	:returns: An :class:`BertWordEmbedding` object for ``lang``.
-	:rtype: :class:`BertWordEmbedding`
+	:returns: An :class:`LUEmbedding` object for ``lang``.
+	:rtype: :class:`LUEmbedding`
 	"""
-	if cache and lang in BERT_EMBS:
-		return BERT_EMBS[lang]
+	if cache and lang in LU_EMBS:
+		return LU_EMBS[lang]
 
-	path = os.path.join('data', 'bert', f'default_L-12_CLS_TOKEN.{lang}.vec')
+	path = os.path.join('data', 'bert', f'{db_name}_lu_embs.json')
 
-	emb = BertWordEmbedding(lang, 768)
+	emb = LUEmbedding(lang, 768)
 	emb.load_from_file(path)
 
 	if cache:
-		BERT_EMBS[lang] = emb
+		LU_EMBS[lang] = emb
 
 	return emb
 
 
 if __name__ == "__main__":
 	configs = [
-		# ('bfn', 'en'),
-		('chinesefn', 'zh'),
-		('japanesefn', 'ja'),
-		('frenchfn', 'fr'),
-		('spanishfn', 'es'),
+		# ('chinesefn', 'zh'),
+		# ('japanesefn', 'ja'),
+		# ('frenchfn', 'fr'),
+		# ('spanishfn', 'es'),
 		('fnbrasil', 'pt'),
-		('swedishfn', 'sv'),
-		('salsa', 'de'),
+		# ('swedishfn', 'sv'),
+		# ('salsa', 'de'),
 	]
-
-	# for db_name, lang in configs:
-	# 	vocab = list(set(k for k,v in get_muse_emb(lang).word2id.items() if k.strip()))
-
-	# 	emb = BertWordEmbedding(lang, 768)
-	# 	emb.load_from_vocab(vocab)
-
-	# 	path = os.path.join('data', 'bert', f'default_L-12_CLS_TOKEN.{lang}.vec')
-	# 	emb.save_to_file(path)
 
 	en_fn = load("bfn", "en")
 
@@ -93,6 +85,11 @@ if __name__ == "__main__":
 
 		if db_name == "fnbrasil":
 			attribute.id_matching(alignment)
+
+			en_emb = get_lu_emb("bfn", "en")
+			l2_emb = get_lu_emb(db_name, lang, cache=False)
+
+			muse.lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3), (3, 0.3)])
 		else:
 			attribute.name_matching(alignment)
 
@@ -117,14 +114,10 @@ if __name__ == "__main__":
 			muse.lu_matching(alignment, en_muse_emb, l2_muse_emb, scoring_configs=[(10, 0.3), (5, 0.3), (3, 0.3)])
 			muse.lu_mean_matching(alignment, en_muse_emb, l2_muse_emb)
 			muse.def_matching(alignment, en_muse_emb, l2_muse_emb)
+		
 
-			en_bert_emb = get_bert_emb("en", cache=True)
-			l2_bert_emb = get_bert_emb(lang)
-
-			muse.lu_matching(alignment, en_bert_emb, l2_bert_emb, scoring_configs=[(10, 0.3), (5, 0.3), (3, 0.3)], name="bert")
-
-		alignment.dump(ignore_scores=set(["lu_muse"]))
-		# alignment.dump()
+		# alignment.dump(ignore_scores=set(["lu_muse"]))
+		alignment.dump()
 
 		print(l2_fn.lang + " finished --- %s seconds ---" % (time.time() - start_time))
 

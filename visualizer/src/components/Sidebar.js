@@ -146,7 +146,7 @@ const Sidebar = observer(
 		renderVectorFields() {
 			const {uiState} = this.props;
 
-			if (uiState.scoring && uiState.scoring.type === 'lu_muse') {
+			if (uiState.scoring && (uiState.scoring.type === 'lu_muse' || uiState.scoring.type === 'lu_bert')) {
 				const {params} = uiState.scoring;
 
 				return (

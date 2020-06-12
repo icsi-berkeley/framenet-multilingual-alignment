@@ -1,4 +1,5 @@
 import os
+import json
 import numpy as np
 from bert_serving.client import BertClient
 
@@ -158,6 +159,24 @@ class BertWordEmbedding(WordEmbedding):
 		return bc.encode([text])[0]
 
 
+class LUEmbedding(WordEmbedding):
+	"""A class that implements some basic functionalities for LU embeddings.
+	"""
+
+	def load_from_file(self, path, nmax=None):
+		with open(path, 'r') as fp:
+			data = json.load(fp)
+			vecs = []
+
+			for i, (k, v) in enumerate(data.items()):
+				self.word2id[k] = i
+				self.id2word[i] = k
+				vecs.append(v)
+			
+			self.embeddings = np.concatenate(vecs).reshape((-1, self.dim))
+
+
+
 class SearchIndex:
 
 	def __init__(self, vecs, words, dim):
@@ -180,7 +199,7 @@ class SearchIndex:
 
 		import faiss
 		index = faiss.IndexFlatIP(dim)
-		index.add(np.array(vecs))
+		index.add(np.array(vecs).astype(np.float32))
 
 		self.index = index
 
@@ -196,6 +215,6 @@ class SearchIndex:
 		:returns: Indices of ``K`` nearest vectors of ``vec```
 		:rtype: np.array
 		"""
-		D, I = self.index.search(vec.reshape(1, -1), K)
+		D, I = self.index.search(vec.astype(np.float32).reshape(1, -1), K)
 		return D[0], I[0]
 	
