@@ -16,6 +16,7 @@ loader and use it.
 
 import os
 import re
+import logging
 import pandas as pd
 import xml.etree.ElementTree as ET
 
@@ -123,7 +124,7 @@ class FNLoader():
 					sentence = anno_set.find(f'{NS}text').text
 					target = anno_set.find(f'{NS}annotationSet/{NS}layer[@name="Target"]/{NS}label[@name="Target"]')
 
-					if target:
+					if target is not None:
 						annotations.append({
 							"sentence": sentence,
 							"lu_pos": (int(target.get("start")), int(target.get("end"))+1)
@@ -209,7 +210,7 @@ class ChineseFNLoader(FNLoader):
 		info = root.find("Frame_Info").find("LexicalUnit_Info")
 		for el in info.findall("lexicalunit"):
 			self.id += 1
-			yield self.id, el.get("lexicalunit_name"), el.get("lexicalunit_pos_mark")
+			yield self.id, el.get("lexicalunit_name"), el.get("lexicalunit_pos_mark"), []
 
 	def parse_fes(self, root):
 		info = root.find("Frame_Info").find("FrameElement_Info")
@@ -270,7 +271,7 @@ class FNBrasilLoader(FNLoader):
 					sentence = anno_set.find(f'sentence/text').text
 					target = anno_set.find(f'layers/layer[@name="Target"]/labels/label[@name="Target"]')
 
-					if target:
+					if target is not None:
 						annotations.append({
 							"sentence": sentence,
 							"lu_pos": (int(target.get("start")), int(target.get("end"))+1)
@@ -333,7 +334,7 @@ class SwedishFNLoader(FNLoader):
 			if f.get("att") == "LU":
 				lu, pos = self.get_lu(f.get("val"))
 				self.id += 1
-				yield self.id, lu, pos
+				yield self.id, lu, pos, []
 
 	def parse_fes(self, root):
 		for f in root.findall("feat"):
@@ -348,6 +349,19 @@ loaders = [
 	FNBrasilLoader,
 	SwedishFNLoader,
 ]
+
+
+def log_loaded_fn(fn):
+	logger = logging.getLogger('alignment')
+
+	logger.info(f'')
+	logger.info(f"              Loaded '{fn.name}' database")
+	logger.info(f'     frame count         = {len(fn.frames)}')
+	logger.info(f'     lu count            = {sum(len(f.lus) for f in fn.frames)}')
+	logger.info(f'     fe count            = {sum(len(f.fes) for f in fn.frames)}')
+	logger.info(f'     lu annotation count = {sum(len(l.anno_sents) for f in fn.frames for l in f.lus)})')
+	logger.info(f'')
+
 
 def load(db_name, lang):
 	"""This is a utility function that given ``db_name`` identifies the
@@ -366,4 +380,7 @@ def load(db_name, lang):
 	if not loader: 
 		raise Exception(f"No loader found for db \"{db_name}\"")
 
-	return loader.load(lang)
+	fn = loader.load(lang)
+	log_loaded_fn(fn)
+
+	return fn
