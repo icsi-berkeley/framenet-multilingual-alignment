@@ -54,7 +54,7 @@ def get_mappings(frm_df):
 
 			try:
 				for syn in wn.synsets(lemma, lang=LANG_MAP[frame.lang], pos=pos):
-					lu_to_syn[lu.name].add(syn.name())
+					lu_to_syn[lu.gid].add(syn.name())
 					syn_to_lu[syn.name()].add(lu.name)
 					frm_to_syn[frame.gid].add(syn.name())
 			except ValueError:
@@ -174,7 +174,7 @@ def lu_matching(alignment):
 		count = 0
 		for lu1 in frame.lus:
 			for lu2 in other.lus:
-				if lu_to_syn[lu1.name] & lu_to_syn[lu2.name]:
+				if lu_to_syn[lu1.gid] & lu_to_syn[lu2.gid]:
 					count += 1
 					break
 

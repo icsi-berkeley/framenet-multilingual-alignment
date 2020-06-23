@@ -227,7 +227,7 @@ class Alignment():
 				"name": frame.name,
 				"language": frame.lang,
 				"LUs": [
-					{ "id": l.gid, "name": l.name }
+					{ "gid": l.gid, "name": l.name }
 					for l in frame.lus
 				],
 				"FEs": [

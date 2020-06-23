@@ -1,6 +1,13 @@
 import os
 import time
+import logging
+
 global_time = time.time()
+
+logging.basicConfig(
+	level=logging.INFO,
+	format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('alignment')
 
 from fnalign.loaders import load
 from fnalign.models import Alignment
@@ -69,8 +76,8 @@ if __name__ == "__main__":
 		# ('chinesefn', 'zh'),
 		# ('japanesefn', 'ja'),
 		# ('frenchfn', 'fr'),
-		# ('spanishfn', 'es'),
-		('fnbrasil', 'pt'),
+		('spanishfn', 'es'),
+		# ('fnbrasil', 'pt'),
 		# ('swedishfn', 'sv'),
 		# ('salsa', 'de'),
 	]
@@ -86,10 +93,11 @@ if __name__ == "__main__":
 		if db_name == "fnbrasil":
 			attribute.id_matching(alignment)
 
-			en_emb = get_lu_emb("bfn", "en")
-			l2_emb = get_lu_emb(db_name, lang, cache=False)
+			# en_emb = get_lu_emb("bfn", "en")
+			# l2_emb = get_lu_emb(db_name, lang, cache=False)
 
-			muse.lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3), (3, 0.3)])
+			# muse.lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3), (3, 0.3)])
+			# muse.lu_mean_matching(alignment, en_emb, l2_emb)
 		else:
 			attribute.name_matching(alignment)
 
@@ -111,14 +119,14 @@ if __name__ == "__main__":
 			if db_name in ["fnbrasil", "salsa"]:
 				muse.fe_mixed_matching(alignment)
 
-			muse.lu_matching(alignment, en_muse_emb, l2_muse_emb, scoring_configs=[(10, 0.3), (5, 0.3), (3, 0.3)])
+			muse.lu_matching(alignment, en_muse_emb, l2_muse_emb, scoring_configs=[(10, 0.3)])
 			muse.lu_mean_matching(alignment, en_muse_emb, l2_muse_emb)
 			muse.def_matching(alignment, en_muse_emb, l2_muse_emb)
 		
 
-		# alignment.dump(ignore_scores=set(["lu_muse"]))
-		alignment.dump()
+		alignment.dump(ignore_scores=set(["lu_muse"]))
+		# alignment.dump()
 
-		print(l2_fn.lang + " finished --- %s seconds ---" % (time.time() - start_time))
+		logger.info(l2_fn.lang + " finished --- %s seconds ---" % (time.time() - start_time))
 
-	print("Process finished --- %s seconds ---" % (time.time() - global_time))
+	logger.info("Process finished --- %s seconds ---" % (time.time() - global_time))

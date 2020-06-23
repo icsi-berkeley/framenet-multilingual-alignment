@@ -353,7 +353,7 @@ class AlignmentStore {
 		if (!this.frameVectorCache[bfnFrame.gid]) {
 			this.frameVectorCache[bfnFrame.gid] = 
 				bfnFrame.LUs
-					.map(x => this.vectorIdsByLU[x])
+					.map(x => this.vectorIdsByLU[x.gid])
 					.filter(x => x)
 					.flatMap(x => x.slice(0, params.neighborhoodSize))
 					.filter(x => x[0] >= params.similarityThreshold);
@@ -362,7 +362,7 @@ class AlignmentStore {
 		if (!this.frameVectorCache[l2Frame.gid]) {
 			this.frameVectorCache[l2Frame.gid] = new Set(
 				l2Frame.LUs
-					.flatMap(x => this.vectorIdsByLU[x])
+					.flatMap(x => this.vectorIdsByLU[x.gid])
 					.filter(x => x)
 					.map(x => x[1])
 			);
@@ -555,7 +555,7 @@ class AlignmentStore {
 
 		const links = LUNodes
 			.flatMap(s =>
-				(relationMap[s.id] || [])
+				(relationMap[s.gid] || [])
 					.slice(0, params.neighborhoodSize)
 					.filter(t => !Array.isArray(t) || t[0] > params.similarityThreshold)
 					.map(t => ({

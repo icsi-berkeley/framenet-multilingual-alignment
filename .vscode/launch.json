@@ -12,38 +12,32 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "Extract features",
+      "name": "Europarl to fastalign",
       "type": "python",
       "request": "launch",
-      "program": "${cwd}/extract_features.py",
+      "program": "${cwd}/alignment/bertalign/europarl_to_fastalign.py",
       "console": "integratedTerminal",
       "args": [
-        "--input_file=${cwd}/data/fastalign-europarl.pt-en",
-        "--output_file=${cwd}/data/fastalign-europarl.pt-en.features.json",
-        "--vocab_file=${cwd}/models/multi_cased_L-12_H-768_A-12/vocab.txt",
-        "--bert_config_file=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_config.json",
-        "--init_checkpoint=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_model.ckpt",
-        "--layers=-1",
-        "--max_seq_length=128",
+        "es"
       ]
     },
     {
       "name": "Create alignment data",
       "type": "python",
       "request": "launch",
-      "program": "${cwd}/create_alignment_data.py",
+      "program": "${cwd}/alignment/bertalign/create_alignment_data.py",
       "console": "integratedTerminal",
       "args": [
-        "--input_sentence_file=${cwd}/data/fastalign-europarl.pt-en",
-        "--input_mapping_file=${cwd}/data/fastalign-europarl.pt-en.intersect.align",
+        "--input_sentence_file=${cwd}/data/europarl/es-en/fastalign-europarl.es-en",
+        "--input_mapping_file=${cwd}/data/europarl/es-en/fastalign-europarl.es-en.intersect.align",
         "--vocab_file=${cwd}/models/multi_cased_L-12_H-768_A-12/vocab.txt",
         "--bert_config_file=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_config.json",
         "--init_checkpoint=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_model.ckpt",
-        "--output_file=${cwd}/data/256-1000-12345-fastalign-europarl.pt-en.tfrecord",
+        "--output_file=${cwd}/data/bert/256-50000-12345-fastalign-europarl.es-en.tfrecord",
         "--layers=-1",
         "--do_lower_case=False",
         "--max_seq_length=256",
-        "--sample_size=1000",
+        "--sample_size=50000",
         "--random_seed=12345"
       ]
     },
@@ -51,10 +45,10 @@
       "name": "Run alignment",
       "type": "python",
       "request": "launch",
-      "program": "${cwd}/run_alignment.py",
+      "program": "${cwd}/alignment/bertalign/run_alignment.py",
       "console": "integratedTerminal",
       "args": [
-        "--input_file=${cwd}/data/256-1000-12345-fastalign-europarl.pt-en.tfrecord",
+        "--input_file=${cwd}/data/bert/256-50000-12345-fastalign-europarl.es-en.tfrecord",
         "--output_dir=${cwd}/alignment_output",
         "--do_train=True",
         // "--do_eval=True",
@@ -62,8 +56,8 @@
         "--init_checkpoint=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_model.ckpt",
         "--train_batch_size=2",
         "--max_seq_length=256",
-        "--num_train_steps=500",
-        "--num_warmup_steps=50",
+        "--num_train_steps=25000",
+        "--num_warmup_steps=2500",
         "--learning_rate=5e-5",
         "--lambda_coef=1"
       ]
@@ -73,7 +67,12 @@
       "type": "python",
       "request": "launch",
       "program": "${cwd}/alignment/create_lu_vectors.py",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "args": [
+        "spanishfn",
+        "es",
+        "/home/arthur/Projects/framenet-multilingual-alignment/models/50k_es_multi_aligned_cased_L-12_H-768_A-12/vocab.txt"
+      ]
     },
     {
       "name": "Main FrameNet alignment",

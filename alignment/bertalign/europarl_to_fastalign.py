@@ -1,9 +1,13 @@
 import os
+import sys
 import tokenization
 
-src_path = os.path.join("data", "europarl", "pt-en", "europarl-v7.pt-en.en")
-tgt_path = os.path.join("data", "europarl", "pt-en", "europarl-v7.pt-en.pt")
-out_path = os.path.join("data", "fastalign-europarl.pt-en")
+LANG = sys.argv[1]
+pair = f'{LANG}-en'
+
+src_path = os.path.join("data", "europarl", pair, f"europarl-v7.{pair}.en")
+tgt_path = os.path.join("data", "europarl", pair, f"europarl-v7.{pair}.{LANG}")
+out_path = os.path.join("data", "europarl", pair, f"fastalign-europarl.{pair}")
 
 src_fp = open(src_path, 'r')
 tgt_fp = open(tgt_path, 'r')

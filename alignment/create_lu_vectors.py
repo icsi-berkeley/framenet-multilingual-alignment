@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 import json
 import itertools
 from collections import defaultdict
@@ -8,15 +9,13 @@ from bert_serving.client import BertClient
 from fnalign.loaders import load
 from bertalign.tokenization import load_vocab, BasicTokenizer, WordpieceTokenizer
 
-MODEL_PATH = "/home/arthur/Projects/framenet-multilingual-alignment/models/50k_multi_aligned_cased_L-12_H-768_A-12"
-
 def chunks(lst, n):
 	"""Yield successive n-sized chunks from lst."""
 	for i in range(0, len(lst), n):
 		yield lst[i:i + n]
 
-def bert_lu_annotation_embeddings(fn):
-	vocab = load_vocab(os.path.join(MODEL_PATH, "vocab.txt"))
+def bert_lu_annotation_embeddings(fn, vocab_path):
+	vocab = load_vocab(vocab_path)
 	basic_tokenizer = BasicTokenizer(do_lower_case=False)
 	wordpiece_tokenizer = WordpieceTokenizer(vocab=vocab)
 	regex = re.compile(r'([ :]{4,}| \.\.\. )')
@@ -91,12 +90,10 @@ def write_lu_vecs(embs_by_lu, filename):
 
 
 if __name__ == "__main__":
-	configs = [
-		('bfn', 'en'),
-		('fnbrasil', 'pt'),
-	]
+	db_name = sys.argv[1]
+	lang = sys.argv[2]
+	vocab_path = sys.argv[3]
 
-	for db_name, lang in configs:
-		fn = load(db_name, lang)
-		embs_by_lu = bert_lu_annotation_embeddings(fn)
-		write_lu_vecs(embs_by_lu, f'{db_name}_lu_embs.json')
+	fn = load(db_name, lang)
+	embs_by_lu = bert_lu_annotation_embeddings(fn, vocab_path)
+	write_lu_vecs(embs_by_lu, f'{db_name}_lu_embs.json')

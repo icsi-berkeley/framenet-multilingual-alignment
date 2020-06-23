@@ -106,11 +106,11 @@ def get_embeddings(sentences):
 	return sel.reshape((len(sentences), -1, 2, sel.shape[-1]))
 
 
-sent_path = os.path.join("data", "fastalign-europarl.pt-en")
+sent_path = os.path.join("data", "europarl", "es-en", "fastalign-europarl.es-en")
 sent_fp = open(sent_path, 'r')
 lines = sent_fp.read().splitlines()
 
-map_path = os.path.join("data", "fastalign-europarl.pt-en.intersect.align")
+map_path = os.path.join("data", "europarl", "es-en", "fastalign-europarl.es-en.intersect.align")
 # map_fp = open(map_path, 'r')
 # maps = map_fp.read().splitlines()
 
@@ -118,11 +118,11 @@ map_path = os.path.join("data", "fastalign-europarl.pt-en.intersect.align")
 # most_frequent_pairs(counts)
 
 pairs = [
-	('year', 'ano'),
-	('wanted', 'queria'),
-	('question', 'questão'),
-	('I', 'eu'),
-	('opportunity', 'oportunidade'),
+	('year', 'año'),
+	('wanted', 'quería'),
+	('question', 'cuestión'),
+	('I', 'yo'),
+	('opportunity', 'oportunidad'),
 	('problem', 'problema'),
 	('love', 'amor'),
 ]
