@@ -73,13 +73,13 @@ def get_lu_emb(db_name, lang, cache=True):
 
 if __name__ == "__main__":
 	configs = [
-		# ('chinesefn', 'zh'),
-		# ('japanesefn', 'ja'),
-		# ('frenchfn', 'fr'),
+		('chinesefn', 'zh'),
+		('japanesefn', 'ja'),
+		('frenchfn', 'fr'),
 		('spanishfn', 'es'),
-		# ('fnbrasil', 'pt'),
-		# ('swedishfn', 'sv'),
-		# ('salsa', 'de'),
+		('fnbrasil', 'pt'),
+		('swedishfn', 'sv'),
+		('salsa', 'de'),
 	]
 
 	en_fn = load("bfn", "en")
