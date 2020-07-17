@@ -1,0 +1,21 @@
+appId: "edu.berkeley.icsi.mlfn.alignment.visualizer"
+
+productName: "FrameNet Alignment Visualizer"
+
+directories:
+  buildResources: resources
+
+files:
+  - from: "build/"
+    to: "./"
+  - "package.json"
+  - "!node_modules/**/*"
+
+mac:
+  target: dmg
+
+win:
+  target: portable
+
+linux:
+  target: AppImage
