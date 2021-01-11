@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import './JsonFileInput.css';
 
+const worker = new Worker('parser.js')
+
 /**
  * 
  * A file input component used to load local json files.
@@ -12,18 +14,17 @@ class JsonFileInput extends React.Component {
 
 	static propTypes = {
 		/**
-		 * A callback called when a valid json file is read and parsed.
+		 * A callback called when the file is changed.
 		 * 
-		 * @param {Object} data the parsed json file.
+		 * @param {String} file the file name.
 		 */
 		onFileChange: PropTypes.func,
-	}
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			error: false,
-		}
+		/**
+		 * A callback called when the file is parsed
+		 * @param {Object} data the parsed json file.
+		 */
+		onFileParse: PropTypes.func,
 	}
 
 	/**
@@ -39,20 +40,16 @@ class JsonFileInput extends React.Component {
 		const file = event.target.files[0];
 
 		if (file) {
-			const reader = new FileReader();
+			this.props.onFileChange(file)
 
-			reader.addEventListener('load', e => {
-				let error = false;
-				try {
-					const data = JSON.parse(e.target.result);
-					this.props.onFileChange(data);
-				} catch (exception) {
-					error = true;
+			worker.postMessage(file)
+			worker.onmessage = (message) => {
+				if (message.data instanceof Error) {
+					this.setState({ error: true });
 				}
-				this.setState({ error });
-			});
 
-			reader.readAsBinaryString(file);
+				this.props.onFileParse(message.data)
+			}
 		}
 	}
 
@@ -64,7 +61,7 @@ class JsonFileInput extends React.Component {
 	 * @returns {JSX}
 	 */
 	renderError() {
-		const {error} = this.state;
+		const {error} = this.props;
 		return error ? <p className="upload-error">Error reading input file.</p> : null;
 	}
 

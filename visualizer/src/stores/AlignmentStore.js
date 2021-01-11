@@ -1,4 +1,4 @@
-import { action, computed, decorate, observable } from 'mobx';
+import { computed, decorate, flow, observable } from 'mobx';
 
 // Default params of some scoring types
 const DEFAULT_PARAMS = {
@@ -28,7 +28,7 @@ const DEFAULT_PARAMS = {
 		sankeyMaxEdges: 5,
 		limitSankeyEdges: true,
 	}
-};
+}
 
 const FE_SCORING_TYPES = new Set([
 	"fe_matching",
@@ -43,6 +43,53 @@ const LU_SCORING_TYPES = new Set([
 	"lu_bert",
 	"lu_mean_muse",
 ])
+
+/**
+ * Awaits until main thread is free again.
+ */
+const oneMoment = () => new Promise(resolve => setTimeout(resolve))
+
+/**
+ * Computes the diagram edges based on the alignment scores.
+ * 
+ * @method
+ * @param {Object} data input alignment data.
+ * @returns {Array} edges of the sankey diagram with source, target and size.
+ */
+const loadEdges = async (data) => {
+	const edges = {}
+	let iter = 0
+	let then = performance.now()
+
+	for (let ai = 0; ai < data.alignments.length; ai++ ){
+		let scores = data.alignments[ai].data
+		let edgeArray = []
+	
+		if (scores) {
+			for (let i = 0; i < scores.length; ++i) {
+				for (let j = 0; j < scores[i].length; ++j) {
+					let value = scores[i][j]
+	
+					if (value > 0) {
+						edgeArray.push([data.indices[0][i], data.indices[1][j], value])
+					}
+
+					if (++iter % 1000 === 0) {
+						let now = performance.now()
+						if (now - then > 100) {
+							await oneMoment()
+							then = performance.now()
+						}
+					}
+				}
+			}
+
+			edges[data.alignments[ai].id] = edgeArray;
+		}
+	}
+
+	return edges;
+}
 
 /**
  * Check if two sets are equal in the sense that they have a matching set of
@@ -125,6 +172,11 @@ class AlignmentStore {
 	 * visualization.
 	 */
 	previousParams = {}
+
+	/**
+	 * Indicates whether the user needs to wait for some heavy operation.
+	 */
+	isLoading = false
 
 	constructor(uiState) {
 		this.uiState = uiState;
@@ -643,24 +695,10 @@ class AlignmentStore {
 	 * @method
 	 * @param {Object} data parsed alignment JSON file.
 	 */
-	load = action(data => {
+	load = flow(function * (data) {
 		this.fndb = data.db[1];
 		this.language = data.lang[1];
-
-		this.edges = {}
-		data.alignments.forEach(x => {
-			const edges = [];
-
-			if (x.data) {
-				x.data.forEach((row, i) => {
-					row.forEach((value, j) => {
-						if (value > 0)
-							edges.push([data.indices[0][i], data.indices[1][j], value])
-					});
-				});
-				this.edges[x.id] = edges;
-			}
-		});
+		this.edges = yield loadEdges(data)
 
 		this.framesByName = {};
 		for (let key in data.frames) {
@@ -707,6 +745,7 @@ decorate(AlignmentStore, {
 	synsetData: observable,
 	vectorIdsByLU: observable,
 	wordsByVectorId: observable,
+	isLoading: observable,
 	lexicalIndices: computed,
 	sankeyData: computed,
 	frameOptions: computed,

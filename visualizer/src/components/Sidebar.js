@@ -45,7 +45,24 @@ const Sidebar = observer(
 		 * @method
 		 * @param {Object} data parsed data from an alignment file.
 		 */
-		onFileChange = data => this.props.store.load(data)
+		onFileChange = data => this.props.store.isLoading = true
+
+		/**
+		 * Handles an alignment file. All parsed data is loaded to the
+		 * AlignmentStore instance.
+		 * 
+		 * @public
+		 * @method
+		 * @param {Object} data parsed data from an alignment file.
+		 */
+		onFileParse = data => {
+			if (!(data instanceof Error)) {
+				this.props.store.load(data)
+			}
+
+			this.props.store.isLoading = false
+		}
+
 
 		/**
 		 * Handles the selection of a scoring option.
@@ -186,7 +203,7 @@ const Sidebar = observer(
 					</div>
 					<div style={contentDisplay} >
 						<FormLabel style={{ marginTop: 0 }}>Alignment file</FormLabel>
-						<JsonFileInput onFileChange={this.onFileChange} />
+						<JsonFileInput onFileChange={this.onFileChange} onFileParse={this.onFileParse} />
 						<div className="sidebar-row">
 							<div>
 								<FormLabel>Scoring technique</FormLabel>
