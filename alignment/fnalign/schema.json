@@ -1,0 +1,289 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://framenet.icsi.berkeley.edu/fndrupal/alignment.schema.json",
+  "title": "FrameNet alignment output",
+  "description": "The output of multiple alignment techniques used in framenets of two different languages.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "description": "The alignment code version.",
+      "type": "string"
+    },
+    "db": {
+      "description": "The names of the databases being alignment, e.g., [bfn, spanishfn] where bfn stands for Berkeley FrameNet",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "lang": {
+      "description": "The languages of the databases being alignment, e.g., [en, es]",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 2
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "indices": {
+      "description": "An array containing two other arrays with frame ids belonging to each language. Each frame id is naturally associated with a position on this array that will be its \"index\". For example, if frame \"2806.en\" has index 27, then in every score array position 27 refers to the alignment score of frame \"2806.en\".",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "description": "The global id of a frame in the alignment context.",
+          "type": "string",
+          "pattern": "^[0-9]+\\.[a-z]{2}$"
+        }
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "frames": {
+      "description": "A mapping of global frame ids -> frame data.",
+      "type": "object",
+      "additionalProperties": {
+        "description": "Frame data.",
+        "type": "object",
+        "properties": {
+          "gid": {
+            "description": "The frame's global id that is referenced by the root's \"indices\" property.",
+            "type": "string",
+            "pattern": "^[0-9]+\\.[a-z]{2}$"
+          },
+          "name": {
+            "description": "The frame name as given by its creator.",
+            "type": "string"
+          },
+          "language": {
+            "description": "The frame language. This property is redundant, but used for performance reasons.",
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2
+          },
+          "LUs": {
+            "description": "The list of lexical units (LUs) that evoke this frame",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "gid": {
+                  "description": "The LU's global id, which is just its frame's global id with the LU local id appended",
+                  "type": "string",
+                  "pattern": "^[0-9]+\\.[a-z]{2}\\.[0-9]+$"
+                },
+                "name": {
+                  "description": "The LU's name.",
+                  "type": "string"
+                }
+              },
+              "required": ["gid", "name"]
+            }
+          },
+          "FEs": {
+            "description": "The list of frame elements (FEs) associated with this frame",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "The FE name.",
+                  "type": "string"
+                },
+                "name_en": {
+                  "description": "The FE name in english. This information exists in some framenets where the FE names were just translated from Berkeley's.",
+                  "type": "string"
+                }
+              },
+              "required": ["name"]
+            }
+          }
+        },
+        "required": ["gid", "name", "language", "LUs", "FEs"]
+      }
+    },
+    "alignments": {
+      "description": "The alignment scores obtained using different techniques.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The alignment technique id.",
+            "type": "string",
+            "oneOf": [
+              {
+                "enum": [
+                  "name_matching",
+                  "core_fe_matching",
+                  "lu_mean_muse",
+                  "muse_exact_fe_match",
+                  "muse_fe_match",
+                  "muse_mixed_fe_match",
+                  "frame_def_muse",
+                  "synset",
+                  "synset_inv",
+                  "lu_wordnet"
+                ]
+              },
+              { "pattern": "^lu_\\w+$" },
+              { "pattern": "^lu_\\w+_\\w+_\\w+$" }
+            ]
+          },
+          "type": {
+            "description": "The category of the alignment technique.",
+            "type": "string",
+            "oneOf": [
+              {
+                "enum": [
+                  "attr_matching",
+                  "fe_matching",
+                  "lu_mean_muse",
+                  "muse_fe_matching",
+                  "frame_def_muse",
+                  "synset",
+                  "synset_inv",
+                  "lu_wordnet"
+                ]
+              },
+              { "pattern": "^lu_\\w+$" }
+            ]
+          },
+          "data": {
+            "description": "The n x m alignment score matrix, where n is the number of frames in framenet1 and m in framenet2. This property is not required because some scores can be computed by the visualizer tool. When publishing alignment outputs for the general public it will always be present.",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "required": ["id", "type", "data"]
+      }
+    },
+    "resources": {
+      "description": "Resources used by the alignment visualizer, such as synset data, LU vects and many others.",
+      "type": "object",
+      "properties": {
+        "fe_def_vecs": {
+          "description": "A mapping of frame global ids -> FE name -> FE definition vector.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "A mapping of FE name -> FE definition vector.",
+            "type": "object",
+            "additionalProperties": {
+              "description": "The FE definition vector representation.",
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "fe_name_vecs": {
+          "description": "A mapping of frame global ids -> FE name -> FE definition vector.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "A mapping of FE name -> FE name vector.",
+            "type": "object",
+            "additionalProperties": {
+              "description": "The FE name vector representation.",
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "lu_vec_nn": {
+          "description": "A mapping of LU global ids -> LU vector neighborhood.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "The LU neighborhood of size K (defined during the alignment) in vector space represented by a list of other LU ids and their similarity.",
+            "type": "array",
+            "items": {
+              "description": "A neighbor vector representation consisting of its LU's global id and similarity.",
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        },
+        "id2_word": {
+          "description": "A mapping of vector id to a word or LU name. Vector id is simply its index in the embedding.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "lu_to_syn": {
+          "description": "A mapping of LU global ids -> set of synset names",
+          "type": "object",
+          "additionalProperties": {
+            "description": "A set of synset names for the LU.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "syn_to_lu": {
+          "description": "A mapping of synset names -> set of LU names",
+          "type": "object",
+          "additionalProperties": {
+            "description": "A set of LU names for the synsets.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "frm_to_syn": {
+          "description": "A mapping of frame global ids -> set of synset names",
+          "type": "object",
+          "additionalProperties": {
+            "description": "A set of synset names related to the frame.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "syn_data": {
+          "description": "A mapping of synset names to synset data.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Synset data.",
+            "type": "object",
+            "properties": {
+              "definition": {
+                "description": "The synset definition.",
+                "type": "string"
+              }
+            },
+            "additionalProperties": {
+              "description": "A mapping of language name -> array of lemmas in that language belonging to this synset.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "required": ["definition"]
+          }
+        }
+      }
+    }
+  },
+  "required": ["version", "db", "lang", "indices", "frames", "alignments"]
+}
