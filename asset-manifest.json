@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/framenet-multilingual-alignment/static/css/main.b0d7f484.chunk.css",
-    "main.js": "/framenet-multilingual-alignment/static/js/main.f706987a.chunk.js",
-    "main.js.map": "/framenet-multilingual-alignment/static/js/main.f706987a.chunk.js.map",
-    "runtime-main.js": "/framenet-multilingual-alignment/static/js/runtime-main.e05bbeec.js",
-    "runtime-main.js.map": "/framenet-multilingual-alignment/static/js/runtime-main.e05bbeec.js.map",
-    "static/css/2.b31b2e03.chunk.css": "/framenet-multilingual-alignment/static/css/2.b31b2e03.chunk.css",
-    "static/js/2.b02b9e61.chunk.js": "/framenet-multilingual-alignment/static/js/2.b02b9e61.chunk.js",
-    "static/js/2.b02b9e61.chunk.js.map": "/framenet-multilingual-alignment/static/js/2.b02b9e61.chunk.js.map",
+    "main.css": "/framenet-multilingual-alignment/static/css/main.8d581849.chunk.css",
+    "main.js": "/framenet-multilingual-alignment/static/js/main.eb3d6b09.chunk.js",
+    "main.js.map": "/framenet-multilingual-alignment/static/js/main.eb3d6b09.chunk.js.map",
+    "runtime-main.js": "/framenet-multilingual-alignment/static/js/runtime-main.e2375059.js",
+    "runtime-main.js.map": "/framenet-multilingual-alignment/static/js/runtime-main.e2375059.js.map",
+    "static/css/2.33ddfd2b.chunk.css": "/framenet-multilingual-alignment/static/css/2.33ddfd2b.chunk.css",
+    "static/js/2.f3dee035.chunk.js": "/framenet-multilingual-alignment/static/js/2.f3dee035.chunk.js",
+    "static/js/2.f3dee035.chunk.js.map": "/framenet-multilingual-alignment/static/js/2.f3dee035.chunk.js.map",
     "index.html": "/framenet-multilingual-alignment/index.html",
-    "precache-manifest.dafaed944e1b4b0339af02f9faa3a574.js": "/framenet-multilingual-alignment/precache-manifest.dafaed944e1b4b0339af02f9faa3a574.js",
+    "precache-manifest.2a11b8da4681a8f8cc4dbfab06787b0a.js": "/framenet-multilingual-alignment/precache-manifest.2a11b8da4681a8f8cc4dbfab06787b0a.js",
     "service-worker.js": "/framenet-multilingual-alignment/service-worker.js",
-    "static/css/2.b31b2e03.chunk.css.map": "/framenet-multilingual-alignment/static/css/2.b31b2e03.chunk.css.map",
-    "static/css/main.b0d7f484.chunk.css.map": "/framenet-multilingual-alignment/static/css/main.b0d7f484.chunk.css.map",
-    "static/js/2.b02b9e61.chunk.js.LICENSE": "/framenet-multilingual-alignment/static/js/2.b02b9e61.chunk.js.LICENSE"
+    "static/css/2.33ddfd2b.chunk.css.map": "/framenet-multilingual-alignment/static/css/2.33ddfd2b.chunk.css.map",
+    "static/css/main.8d581849.chunk.css.map": "/framenet-multilingual-alignment/static/css/main.8d581849.chunk.css.map",
+    "static/js/2.f3dee035.chunk.js.LICENSE.txt": "/framenet-multilingual-alignment/static/js/2.f3dee035.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.e05bbeec.js",
-    "static/css/2.b31b2e03.chunk.css",
-    "static/js/2.b02b9e61.chunk.js",
-    "static/css/main.b0d7f484.chunk.css",
-    "static/js/main.f706987a.chunk.js"
+    "static/js/runtime-main.e2375059.js",
+    "static/css/2.33ddfd2b.chunk.css",
+    "static/js/2.f3dee035.chunk.js",
+    "static/css/main.8d581849.chunk.css",
+    "static/js/main.eb3d6b09.chunk.js"
   ]
 }

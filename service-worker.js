@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/framenet-multilingual-alignment/precache-manifest.dafaed944e1b4b0339af02f9faa3a574.js"
+  "/framenet-multilingual-alignment/precache-manifest.2a11b8da4681a8f8cc4dbfab06787b0a.js"
 );
 
 self.addEventListener('message', (event) => {
