@@ -2,7 +2,4 @@
 	display: flex;
 	align-items: center;
 }
-.checkbox-wrapper > input { 
-	width: 24px;
-	height: 24px;
-}
+
