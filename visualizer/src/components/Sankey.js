@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { format } from 'd3-format';
 import { select } from 'd3-selection';
 import { observer } from 'mobx-react';
@@ -289,6 +290,14 @@ const Sankey = observer(
 						data.length > 0
 						? <svg ref={node => this.svg = node}></svg>
 						: <h3 className="no-data-text">No data to show.</h3>
+					}
+					{store.isComputingSankey &&
+						<div className="loading-overlay">
+							<div className="loading-box">
+								<span>Computing</span>
+								<ScaleLoader height="24" color={'#3F51B5'} />
+							</div>
+						</div>
 					}
 				</div>
 			)

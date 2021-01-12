@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import MultiSelect from "@kenshooui/react-multi-select";
+import ClipLoader from "react-spinners/ClipLoader";
 import { FaBars } from 'react-icons/fa';
 import { observer } from 'mobx-react';
 
@@ -168,18 +169,22 @@ const Sidebar = observer(
 
 				return (
 					<div className="sidebar-row">
-						<NumericInput
-							min={1}
-							step={1}
-							value={params.neighborhoodSize}
-							onChange={this.onNeighborhoodSizeChange}
-							label="Vector neighborhood size"
-						/>
-						<Slider
-							label="Cosine similarity threshold"
-							value={params.similarityThreshold}
-							onChange={this.onSimilarityThresholdChange}
-						/>
+						<div className="sidebar-cell">
+							<NumericInput
+								min={1}
+								step={1}
+								value={params.neighborhoodSize}
+								onChange={this.onNeighborhoodSizeChange}
+								label="Vector neighborhood size"
+							/>
+						</div>
+						<div className="sidebar-cell">
+							<Slider
+								label="Cosine similarity threshold"
+								value={params.similarityThreshold}
+								onChange={this.onSimilarityThresholdChange}
+							/>
+						</div>
 					</div>
 				);
 			}
@@ -187,7 +192,7 @@ const Sidebar = observer(
 		
 		render() {
 			const {store, uiState} = this.props;
-			const sidebarWidth = { width: uiState.isSidebarOpen ? '500px' : '60px' };
+			const sidebarWidth = { width: `calc(${uiState.isSidebarOpen ? '550px' : '60px'} - 32px)` };
 			const contentDisplay = { display: uiState.isSidebarOpen ? 'block' : 'none' };
 			const params = uiState.scoring ? uiState.scoring.params : {};
 		
@@ -203,37 +208,53 @@ const Sidebar = observer(
 					</div>
 					<div style={contentDisplay} >
 						<FormLabel style={{ marginTop: 0 }}>Alignment file</FormLabel>
-						<JsonFileInput onFileChange={this.onFileChange} onFileParse={this.onFileParse} />
 						<div className="sidebar-row">
-							<div>
+							<JsonFileInput onFileChange={this.onFileChange} onFileParse={this.onFileParse} />
+							{store.isLoading &&
+								<ClipLoader size={24} color={'#3F51B5'} css={'margin-left: 25px;'} />
+							}
+						</div>
+						<div className="sidebar-row">
+							<div className="sidebar-cell">
 								<FormLabel>Scoring technique</FormLabel>
 								<Select
 									options={uiState.scoringSelectOptions}
 									onChange={this.onScoringChange}
+									disabled={store.isLoading}
 								/>
 							</div>
-							<Slider
-								value={params.threshold}
-								onChange={this.onThresholdChange}
-								label="Score threshold"
-							/>
+							<div className="sidebar-cell">
+								<Slider
+									value={params.threshold}
+									disabled={store.isLoading || !uiState.scoring}
+									onChange={this.onThresholdChange}
+									label="Score threshold"
+								/>
+							</div>
 						</div>
 						{this.renderVectorFields()}
 						<div className="sidebar-row">
-							<CheckBoxEnabledInput
-								checked={params.limitSankeyEdges}
-								value={params.sankeyMaxEdges}
-								onCheckedChange={this.onLimitSankeyEdgesChange}
-								onValueChange={this.onSankeyEdgesMaxChange}
-								min={1}
-								label="Restrict number of connections of each frame:"
-								placeholder="Max # of edges for frame"
-							/>
-							<CheckBox
-								checked={params.displayOnlyFrameSet}
-								onChange={this.onDisplayOnlyFrameSetChange}
-								label="Show ONLY selected frames"
-							/>
+							<div className="sidebar-cell">
+								<CheckBoxEnabledInput
+									checked={params.limitSankeyEdges}
+									value={params.sankeyMaxEdges}
+									disabled={store.isLoading || !uiState.scoring}
+									onCheckedChange={this.onLimitSankeyEdgesChange}
+									onValueChange={this.onSankeyEdgesMaxChange}
+									min={1}
+									label="Restrict number of connections of each frame:"
+									placeholder="Max # of edges for frame"
+								/>
+							</div>
+							<div className="sidebar-cell">
+								<CheckBox
+									id="show-selected-only"
+									checked={params.displayOnlyFrameSet}
+									disabled={store.isLoading || !uiState.scoring}
+									onChange={this.onDisplayOnlyFrameSetChange}
+									label="Show ONLY selected frames"
+								/>
+							</div>
 						</div>
 						<FormLabel>Frame selection</FormLabel>
 						<MultiSelect

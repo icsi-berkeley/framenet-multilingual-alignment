@@ -27,7 +27,7 @@ const Slider = observer(
 		}
 
 		render(){
-			const {value, onChange, label} = this.props;
+			const {value, disabled, onChange, label} = this.props;
 
 			return (
 				<div className="slider-container">
@@ -39,6 +39,7 @@ const Slider = observer(
 							max={1}
 							step={0.001}
 							value={value || ""}
+							disabled={disabled}
 							onChange={e => onChange(e.target.value)}
 							className="slider" />
 						<input
@@ -47,6 +48,7 @@ const Slider = observer(
 							max={1}
 							step="any"
 							value={value || ""}
+							disabled={disabled}
 							onChange={e => onChange(e.target.value)}
 							className="slider-text" />
 					</div>

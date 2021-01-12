@@ -67,10 +67,10 @@ class JsonFileInput extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<>
 				<input type="file" onChange={this.onFileChange} />
 				{this.renderError()}
-			</div>
+			</>
 		);
 	}
 }

@@ -63,24 +63,24 @@ export default class NumericInput extends React.Component {
 	}
 
 	render() {
-		const {min, max, step, placeholder, value, disabled, onChange} = this.props;
+		const {min, max, step, placeholder, value, disabled, onChange, style} = this.props;
 
 		return (
-			<div>
+			<>
 				{this.renderLabel()}
-				<div className="numeric-input-wrapper">
-					<input
-						type="number"
-						min={min}
-						max={max}
-						step={step}
-						placeholder={placeholder}
-						value={value || ''}
-						disabled={disabled}
-						onChange={e => onChange(Number(e.target.value))}
-					/>
-			</div>
-			</div>
+				<input
+					type="number"
+					min={min}
+					max={max}
+					step={step}
+					placeholder={placeholder}
+					value={value || ''}
+					disabled={disabled}
+					onChange={e => onChange(Number(e.target.value))}
+					style={style}
+					className="numeric-input-wrapper"
+				/>
+			</>
 		);
 	}
 };

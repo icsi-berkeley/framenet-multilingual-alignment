@@ -995,6 +995,18 @@
     "@emotion/utils" "0.11.3"
     "@emotion/weak-memoize" "0.2.5"
 
+"@emotion/core@^10.0.35":
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/@emotion/core/-/core-10.1.1.tgz#c956c1365f2f2481960064bcb8c4732e5fb612c3"
+  integrity sha512-ZMLG6qpXR8x031NXD8HJqugy/AZSkAuMxxqB46pmAR7ze47MhNJ56cdoX243QPZdGctrdfo+s08yZTiwaUcRKA==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    "@emotion/cache" "^10.0.27"
+    "@emotion/css" "^10.0.27"
+    "@emotion/serialize" "^0.11.15"
+    "@emotion/sheet" "0.9.4"
+    "@emotion/utils" "0.11.3"
+
 "@emotion/core@^10.0.9":
   version "10.0.27"
   resolved "https://registry.yarnpkg.com/@emotion/core/-/core-10.0.27.tgz#7c3f78be681ab2273f3bf11ca3e2edc4a9dd1fdc"
@@ -3195,6 +3207,11 @@ compression@^1.7.4:
     on-headers "~1.0.2"
     safe-buffer "5.1.2"
     vary "~1.1.2"
+
+computed-async-mobx@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/computed-async-mobx/-/computed-async-mobx-6.1.0.tgz#84f0a9a74402aa56426607e3b72c2889c20f97bc"
+  integrity sha512-ZIdSUtNf0kJYlZZkNBGb1Np5S3rGjwe1JoRNN1T3L7BJVh5OqqL5K07FsIRNQvBACFHOUpn5hLzmUmhKxd/m/Q==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -7800,6 +7817,11 @@ mobx-react@^6.1.4:
   dependencies:
     mobx-react-lite "^1.4.2"
 
+mobx-utils@^5.0.0:
+  version "5.6.1"
+  resolved "https://registry.yarnpkg.com/mobx-utils/-/mobx-utils-5.6.1.tgz#b7d9184b7442fe704be367d4363a2e9961be28cc"
+  integrity sha512-bpTJzM8MXniGnXCZY+ImjPDqBKQ3+G3g/QFSPtNkH6HM3x14DAPqKH7No7NDyhbXBMv3FaVetsgnoEPozbi45Q==
+
 mobx@^5.15.0:
   version "5.15.1"
   resolved "https://registry.yarnpkg.com/mobx/-/mobx-5.15.1.tgz#ba07807808b3f9dc3e6b0a74ba69bcccc6df4ece"
@@ -9877,6 +9899,13 @@ react-simple-code-editor@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
+
+react-spinners@^0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.10.4.tgz#3789086f3c1289d904163517dfa240e13ffd460c"
+  integrity sha512-WRzHTHjx1nvMzsyTXg1J8VVDYadGGeas6pzzxGk0T+dVSZpMIN9NrKV/h76SybdsU8cUp55+u9L1V1C9/oafhw==
+  dependencies:
+    "@emotion/core" "^10.0.35"
 
 react-styleguidist@^10.4.2:
   version "10.4.2"

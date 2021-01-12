@@ -1,5 +1,4 @@
 onmessage = function(message) {
-	console.log('parser')
 	const reader = new FileReader();
 
 	reader.addEventListener('load', load => {

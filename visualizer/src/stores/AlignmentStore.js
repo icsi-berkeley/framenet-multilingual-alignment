@@ -1,4 +1,5 @@
 import { computed, decorate, flow, observable } from 'mobx';
+import { asyncComputed } from 'computed-async-mobx';
 
 // Default params of some scoring types
 const DEFAULT_PARAMS = {
@@ -182,6 +183,39 @@ class AlignmentStore {
 		this.uiState = uiState;
 	}
 
+	asyncSankeyData = asyncComputed([], 200, async () => {
+		const state = this.uiState;
+		const {scoring, sankeyFrames} = state;
+		
+		if (scoring) {
+			const frames = this.frames;
+			const {
+				displayOnlyFrameSet,
+				threshold,
+				neighborhoodSize,
+				similarityThreshold,
+			} = scoring.params;
+
+			await new Promise(resolve => setTimeout(resolve, 1000))
+			const frameSet = new Set(sankeyFrames.map(x => x.id));
+			const filterFn = displayOnlyFrameSet
+				? x => frameSet.has(x[0]) && frameSet.has(x[1]) && x[2] >= threshold
+				: x => (frameSet.has(x[0]) || frameSet.has(x[1])) && x[2] >= threshold;
+			const edges = await this.getEdges(frameSet);
+			const filtered = edges.filter(filterFn);
+			const pruned = this.pruneEdges(filtered)
+				.map(x => [
+					frames[x[0]].name + '.' + frames[x[0]].language,
+					frames[x[1]].name + '.' + frames[x[1]].language,
+					x[2],
+				]);
+
+			return pruned
+		} else {
+			return [];
+		}
+	})
+	
 	/**
 	 * Returns the edges of a sankey diagram of the stored alignment respecting
 	 * UI params. 
@@ -190,28 +224,15 @@ class AlignmentStore {
 	 * @method
 	 * @returns {Array} edges of the sankey diagram with source, target and size.
 	 */
-	get sankeyData() {
-		const state = this.uiState;
-		const {scoring} = state;
-		
-		if (scoring) {
-			const {params} = scoring;
-			const frameSet = new Set(state.sankeyFrames.map(x => x.id));
-			const filterFn = params.displayOnlyFrameSet
-				? x => frameSet.has(x[0]) && frameSet.has(x[1]) && x[2] >= params.threshold
-				: x => (frameSet.has(x[0]) || frameSet.has(x[1])) && x[2] >= params.threshold;
-			const edges = this.getEdges(frameSet);
-			const filtered = edges.filter(filterFn);
+	get sankeyData () {
+		return this.asyncSankeyData.get();
+	}
 
-			return this.pruneEdges(filtered)
-				.map(x => [
-					this.frames[x[0]].name + '.' + this.frames[x[0]].language,
-					this.frames[x[1]].name + '.' + this.frames[x[1]].language,
-					x[2],
-				]);
-		} else {
-			return [];
-		}
+	/**
+	 * Indicates whether some heavy edge computation is happening.
+	 */
+	get isComputingSankey() {
+		return this.asyncSankeyData.busy;
 	}
 
 	/**
@@ -304,7 +325,7 @@ class AlignmentStore {
 	 * @returns {Array[Array]} edges of the sankey diagram in the format
 	 * 	[source id, target id, score value].
 	 */
-	getEdges(frameSet) {
+	async getEdges(frameSet) {
 		const {scoring} = this.uiState;
 		const {params} = scoring;
 		const prevParams = this.previousParams[scoring.id] || {};
@@ -325,7 +346,7 @@ class AlignmentStore {
 			}
 
 			if (recompute) {
-				edges = this.computeEdges(frameSet);
+				edges = await this.computeEdges(frameSet);
 				this.edges[scoring.id] = edges;
 			} else {
 				edges = this.edges[scoring.id];
@@ -351,7 +372,7 @@ class AlignmentStore {
 	 * @returns {Array[Array]} edges of the sankey diagram in the format
 	 * 	[source id, target id, score value].
 	 */
-	computeEdges(frameSet) {
+	async computeEdges(frameSet) {
 		const edges = [];
 		/**
 		 * Indices are filtered to prevent duplicate edges when "frameSet" has
@@ -359,7 +380,7 @@ class AlignmentStore {
 		 * is a L2 frame, "A" would first be scored against all L2 frames
 		 * (including "B"). Later, "B" would be scored against all english frames;
 		 * the alignment of the pair ("A", "B") would end up being calculated
-		 * again. Of course, we could always check if the other frame is in the
+		 * twice. Of course, we could always check if the other frame is in the
 		 * frame set before calculating the pair score, but filtering the indices
 		 * yields the same results with less checks.
 		 */
@@ -374,16 +395,32 @@ class AlignmentStore {
 	
 			if (frame.LUs.length === 0) {
 				continue;
-			} 
-	
+			}
+
+			let index
+			let iter = 0
+			let then = performance.now()
+
 			if (frame.language === 'en') {
-				edges.push(
-					...indices[1].map(i => [frame.gid, i, this.LUVectorMatchingScore(frame, this.frames[i])])
-				);
+				for (let i = 0; i < indices[1].length; ++i) {
+					index = indices[1][i]
+					edges.push([frame.gid, index, this.LUVectorMatchingScore(frame, this.frames[index])])
+					++iter
+				}
 			} else {
-				edges.push(
-					...indices[0].map(i => [i, frame.gid, this.LUVectorMatchingScore(this.frames[i], frame)])
-				);
+				for (let i = 0; i < indices[0].length; ++i) {
+					index = indices[0][i]
+					edges.push([index, frame.gid, this.LUVectorMatchingScore(this.frames[index], frame)])
+					++iter
+				}
+			}
+
+			if (++iter % 10000 === 0) {
+				let now = performance.now()
+				if (now - then > 100) {
+					await oneMoment()
+					then = performance.now()
+				}
 			}
 		}
 		this.frameVectorCache = {};
@@ -748,6 +785,7 @@ decorate(AlignmentStore, {
 	isLoading: observable,
 	lexicalIndices: computed,
 	sankeyData: computed,
+	isComputingSankey: computed,
 	frameOptions: computed,
 });
 

@@ -14,7 +14,7 @@
 	margin-left: 6px;
 	padding: 0 4px;
 	height: 26px;
-	width: 60px;
+	width: calc(60px - 8px - 16px);
 }
 
 .slider::-webkit-slider-runnable-track {
@@ -36,6 +36,9 @@
 	cursor: pointer;
 	-webkit-appearance: none;
 	margin-top: -9px;
+}
+.slider:disabled::-webkit-slider-thumb{
+	background: graytext;
 }
 .slider:focus::-webkit-slider-runnable-track {
 	background: #D3D3D3;

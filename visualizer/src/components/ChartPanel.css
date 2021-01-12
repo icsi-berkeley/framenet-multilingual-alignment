@@ -16,6 +16,7 @@
 #chart-panel-container > .visualization-container {
 	display: flex;
 	justify-content: center;
+	position: relative;
 }
 
 .shift > .visualization-container,

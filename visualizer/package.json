@@ -5,16 +5,19 @@
   "homepage": "https://icsi-berkeley.github.io/framenet-multilingual-alignment/",
   "dependencies": {
     "@kenshooui/react-multi-select": "^1.1.5",
+    "computed-async-mobx": "^6.1.0",
     "d3": "^4.13.0",
     "mobx": "^5.15.0",
     "mobx-react": "^6.1.4",
+    "mobx-utils": "^5.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-icons": "^3.8.0",
     "react-range": "^1.4.3",
     "react-resize-detector": "^4.2.1",
-    "react-select": "^3.0.8"
+    "react-select": "^3.0.8",
+    "react-spinners": "^0.10.4"
   },
   "scripts": {
     "start": "react-scripts start",

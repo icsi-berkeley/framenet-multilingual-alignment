@@ -55,6 +55,7 @@ export default class CheckBoxEnabledInput extends React.Component {
 			label,
 			placeholder,
 			min,
+			disabled,
 			onCheckedChange,
 			onValueChange,
 		} = this.props;
@@ -62,17 +63,20 @@ export default class CheckBoxEnabledInput extends React.Component {
 		return (
 			<div className="checkbox-enable-input-wrapper">
 				<CheckBox
+					id="restrict-neighborhood"
 					checked={checked}
 					onChange={onCheckedChange}
 					label={label}
+					disabled={disabled}
 				/>
 				<div className="checkbox-enabled-input-input-wrapper">
 					<NumericInput
 						min={min}
 						placeholder={placeholder}
 						value={value}
-						disabled={!checked}
+						disabled={disabled || !checked}
 						onChange={onValueChange}
+						// style={{ width: '202px' }}
 					/>
 				</div>
 			</div>
