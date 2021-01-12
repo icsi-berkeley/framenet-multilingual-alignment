@@ -121,7 +121,8 @@ class FNLoader():
 				annotations = list()
 
 				for anno_set in lu_root.findall(f"{NS}subCorpus/{NS}sentence"):
-					sentence = anno_set.find(f'{NS}text').text
+					text_el = anno_set.find(f'{NS}text')
+					sentence = text_el.text if text_el else anno_set.text
 					target = anno_set.find(f'{NS}annotationSet/{NS}layer[@name="Target"]/{NS}label[@name="Target"]')
 
 					if target is not None:
