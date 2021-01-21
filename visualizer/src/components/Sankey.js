@@ -295,7 +295,7 @@ const Sankey = observer(
 						<div className="loading-overlay">
 							<div className="loading-box">
 								<span>Computing</span>
-								<ScaleLoader height="24" color={'#3F51B5'} />
+								<ScaleLoader height="24px" color={'#3F51B5'} />
 							</div>
 						</div>
 					}

@@ -192,7 +192,9 @@ class AlignmentStore {
 			const {
 				displayOnlyFrameSet,
 				threshold,
+				// eslint-disable-next-line no-unused-vars
 				neighborhoodSize,
+				// eslint-disable-next-line no-unused-vars
 				similarityThreshold,
 			} = scoring.params;
 

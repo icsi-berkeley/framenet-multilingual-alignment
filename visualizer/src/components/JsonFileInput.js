@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import './JsonFileInput.css';
 
-const worker = new Worker('parser.js')
+import parserScript from '../workers/parser'
+
+const worker = new Worker(parserScript)
 
 /**
  * 

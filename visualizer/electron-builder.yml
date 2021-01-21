@@ -1,6 +1,6 @@
 appId: "edu.berkeley.icsi.mlfn.alignment.visualizer"
 
-productName: "FrameNet Alignment Visualizer"
+productName: "ViToXF - FrameNet alignments"
 
 directories:
   buildResources: resources
