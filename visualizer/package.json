@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "electron-build": "PUBLIC_URL=./ react-scripts build && cp electron.js build/electron.js && electron-builder -mwl"
+    "electron-build": "PUBLIC_URL=./ react-scripts build && cp electron.js build/electron.js && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -mwl"
   },
   "eslintConfig": {
     "extends": "react-app"
