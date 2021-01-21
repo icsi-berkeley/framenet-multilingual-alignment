@@ -1,5 +1,6 @@
-"""This module contains a collection of alignment algorithms that are based on
-MUSE: Multilingual Unsupervised and Supervised Embeddings.
+"""This module contains a collection of vector based alignment algorithms for
+MUSE (Multilingual Unsupervised and Supervised Embeddings) and BERT
+(Bidirectional Encoder Representations from Transformers).
 
 .. moduleauthor:: Arthur Lorenzi Almeida <lorenzi.arthur@gmail.com>
 """
@@ -195,8 +196,28 @@ def fe_score(frame, other, def_vecs, name_vecs):
 	return sum(sims)/len(sims)
 
 
-def lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs, name='bert'):
-	""" TODO: This method should be the same as 'lu_matching'
+def lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs):
+	"""Computes scores of each pair of frames on the alignment based on two
+	different aligned BERT word embeddings.
+
+	This method consists of finding for each lexical unit in english frames its
+	embedding and the 5 nearest neighbor of said embedding in the l2 vector set.
+	The score of each alignment between a pair of frames is defined by the count
+	of LUs of the l2 frame in the neighborhood the english frame LUs divided by
+	the english frame LU count. Each tuple in ``scoring_configs`` defines the
+	neighborhood based on a int value for maximum size and a float value as the
+	threshold distance to be considered a neighbor.
+
+	:param alignment: An :class:`Alignment` instance.
+	:type alignment: :class:`Alignment`
+	:param en_emb: An :class:`LUEmbedding`instance for english.
+	:type en_emb: :class:`LUEmbedding`
+	:param l2_emb: An :class:`LUEmbedding`instance for l2.
+	:type l2_emb: :class:`LUEmbedding`
+	:param scoring_configs:
+		A list of scoring config tuples containing a int value for K and a float
+		value for threshold.
+	:type scoring_configs: list(tuple(int, float))
 	"""
 	K = max(c[0] for c in scoring_configs)
 
@@ -225,23 +246,20 @@ def lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs, name='bert'):
 
 	if len(scoring_configs) == 1:
 		scores = lu_scores(alignment, lu_nn, scoring_configs[0][0], scoring_configs[0][1])
-		alignment.add_scores(f'lu_{name}', f'lu_{name}', scores, desc='LU translations using BERT')
+		alignment.add_scores(f'lu_bert', f'lu_bert', scores, desc='LU translations using BERT')
 	else:
 		for c in scoring_configs:
 			scores = lu_scores(alignment, lu_nn, c[0], c[1])
 			alignment.add_scores(
-				f'lu_{name}_{c[0]}_{c[1]}', f'lu_{name}', scores,
+				f'lu_bert_{c[0]}_{c[1]}', f'lu_bert', scores,
 				desc=f'LU translations using BERT (K={c[0]}, Threshold={c[1]})',
 				K=c[0], threshold=c[1])
 
 
 
-def lu_matching(alignment, en_emb, l2_emb, scoring_configs, name="muse"):
+def lu_muse_matching(alignment, en_emb, l2_emb, scoring_configs):
 	"""Computes scores of each pair of frames on the alignment based on two
-	different aligned word embeddings.
-
-	TODO: move this method to another file since it can be used for vectors other
-	than MUSE.
+	different MUSE word embeddings.
 
 	This method consists of finding for each lexical unit in english frames its
 	embedding and the 5 nearest neighbor of said embedding in the l2 vector set.
@@ -253,16 +271,14 @@ def lu_matching(alignment, en_emb, l2_emb, scoring_configs, name="muse"):
 
 	:param alignment: An :class:`Alignment` instance.
 	:type alignment: :class:`Alignment`
-	:param en_emb: An :class:`WordEmbedding`instance for english.
-	:type en_emb: :class:`WordEmbedding`
-	:param l2_emb: An :class:`WordEmbedding`instance for l2.
-	:type l2_emb: :class:`WordEmbedding`
+	:param en_emb: An :class:`MuseWordEmbedding`instance for english.
+	:type en_emb: :class:`MuseWordEmbedding`
+	:param l2_emb: An :class:`MuseWordEmbedding`instance for l2.
+	:type l2_emb: :class:`MuseWordEmbedding`
 	:param scoring_configs:
 		A list of scoring config tuples containing a int value for K and a float
 		value for threshold.
 	:type scoring_configs: list(tuple(int, float))
-	:param name: Embedding type name.
-	:type param: str
 	"""
 	K = max(c[0] for c in scoring_configs)
 
@@ -313,12 +329,12 @@ def lu_matching(alignment, en_emb, l2_emb, scoring_configs, name="muse"):
 
 	if len(scoring_configs) == 1:
 		scores = lu_scores(alignment, lu_nn, scoring_configs[0][0], scoring_configs[0][1])
-		alignment.add_scores(f'lu_{name}', f'lu_{name}', scores, desc='LU translations using MUSE')
+		alignment.add_scores(f'lu_muse', f'lu_muse', scores, desc='LU translations using MUSE')
 	else:
 		for c in scoring_configs:
 			scores = lu_scores(alignment, lu_nn, c[0], c[1])
 			alignment.add_scores(
-				f'lu_{name}_{c[0]}_{c[1]}', f'lu_{name}', scores,
+				f'lu_muse_{c[0]}_{c[1]}', f'lu_muse', scores,
 				desc=f'LU translations using MUSE (K={c[0]}, Threshold={c[1]})',
 				K=c[0], threshold=c[1])
 

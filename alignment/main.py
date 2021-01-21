@@ -11,7 +11,7 @@ logger = logging.getLogger('alignment')
 
 from fnalign.loaders import load
 from fnalign.models import Alignment
-from fnalign.alignment import attribute, muse, wordnet
+from fnalign.alignment import attribute, vector, wordnet
 from fnalign.embeddings import MuseWordEmbedding, LUEmbedding
 
 MUSE_NMAX=200000
@@ -44,7 +44,7 @@ def get_muse_emb(lang, nmax=200000, cache=False):
 
 	return emb
 
-def get_lu_emb(db_name, lang, cache=True):
+def get_lu_emb(db_name, lang, cache=False):
 	"""Instantiates a new :class:`LUEmbedding` with language ``lang`` when needed,
 	otherwise retrieves one from cache.
 
@@ -92,12 +92,6 @@ if __name__ == "__main__":
 
 		if db_name == "fnbrasil":
 			attribute.id_matching(alignment)
-
-			# en_emb = get_lu_emb("bfn", "en")
-			# l2_emb = get_lu_emb(db_name, lang, cache=False)
-
-			# muse.lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3), (3, 0.3)])
-			# muse.lu_mean_matching(alignment, en_emb, l2_emb)
 		else:
 			attribute.name_matching(alignment)
 
@@ -108,21 +102,27 @@ if __name__ == "__main__":
 			wordnet.lu_matching(alignment)
 			wordnet.synset_matching(alignment)
 
-		if lang not in ["zh", "ja"]:
-			en_muse_emb = get_muse_emb("en", nmax=MUSE_NMAX, cache=True)
-			l2_muse_emb = get_muse_emb(lang, nmax=MUSE_NMAX)
+		if db_name not in ["chinesefn", "japanesefn"]:
+			en_emb = get_muse_emb("en", nmax=MUSE_NMAX, cache=True)
+			l2_emb = get_muse_emb(lang, nmax=MUSE_NMAX)
 
 			if lang != 'sv':
-				muse.fe_matching(alignment, en_muse_emb, l2_muse_emb)
-				muse.fe_exact_matching(alignment, en_muse_emb, l2_muse_emb)
+				vector.fe_matching(alignment, en_emb, l2_emb)
+				vector.fe_exact_matching(alignment, en_emb, l2_emb)
 				
 			if db_name in ["fnbrasil", "salsa"]:
-				muse.fe_mixed_matching(alignment)
+				vector.fe_mixed_matching(alignment)
 
-			muse.lu_matching(alignment, en_muse_emb, l2_muse_emb, scoring_configs=[(10, 0.3)])
-			muse.lu_mean_matching(alignment, en_muse_emb, l2_muse_emb)
-			muse.def_matching(alignment, en_muse_emb, l2_muse_emb)
-		
+			vector.lu_muse_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3), (3, 0.3)])
+			vector.lu_mean_matching(alignment, en_emb, l2_emb)
+			vector.def_matching(alignment, en_emb, l2_emb)
+
+		if db_name in ["spanishfn", "fnbrasil"]:
+			en_emb = get_lu_emb("bfn", "en", cache=True)
+			l2_emb = get_lu_emb(db_name, lang)
+
+			vector.lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3), (3, 0.3)])
+			vector.lu_mean_matching(alignment, en_emb, l2_emb)
 
 		alignment.dump(ignore_scores=set(["lu_muse"]))
 		# alignment.dump()

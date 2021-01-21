@@ -43,10 +43,10 @@ Wordnet
    :members: synset_matching,lu_matching,get_mappings,get_synsets,set_resources
 
 *********************************************************
-MUSE - Multilingual Unsupervised or Supervised Embeddings
+Vectors - MUSE and BERT
 *********************************************************
 
-.. automodule:: fnalign.alignment.muse
+.. automodule:: fnalign.alignment.vectors
    :members:
 
 *******************
