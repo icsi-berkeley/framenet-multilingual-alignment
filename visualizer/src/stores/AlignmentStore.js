@@ -179,7 +179,7 @@ class AlignmentStore {
 	/**
 	 * Dictionary of words with BERT vector ids as keys.
 	 */
-	bertwordsByVectorId = []
+	bertWordsByVectorId = []
 
 	/**
 	 * Dictionary used for caching the vectors of frames.
@@ -578,6 +578,7 @@ class AlignmentStore {
 	 * @returns {Object} Graph definition with a node list and a link list.
 	 */
 	LUBertGraph() {
+		console.log('pimbou')
 		const {params} = this.uiState.scoring;
 
 		const nodes = this.getNodes();
@@ -822,7 +823,7 @@ class AlignmentStore {
 		this.museVectorIdsByLU = data.resources.lu_vec_nn_muse;
 		this.museWordsByVectorId = data.resources.id2word_muse;
 		this.bertVectorIdsByLU = data.resources.lu_vec_nn_bert;
-		this.bertwordsByVectorId = data.resources.id2word_bert;
+		this.bertWordsByVectorId = data.resources.id2word_bert;
 
 		// Resets
 		this.uiState.setSelectedFramePair(null, null);
@@ -842,7 +843,7 @@ decorate(AlignmentStore, {
 	museVectorIdsByLU: observable,
 	museWordsByVectorId: observable,
 	bertVectorIdsByLU: observable,
-	bertwordsByVectorId: observable,
+	bertWordsByVectorId: observable,
 	isLoading: observable,
 	lexicalIndices: computed,
 	sankeyData: computed,

@@ -228,7 +228,7 @@
           }
         },
         "lu_vec_nn_bert": {
-          "description": "A mapping of LU global ids -> BERT LU vector neighborhood.",
+          "description": "A mapping of LU local ids -> BERT LU vector neighborhood. This vector space is comprised only of LUs",
           "type": "object",
           "additionalProperties": {
             "description": "The LU neighborhood of size K (defined during the alignment) in vector space represented by a list of other LU ids and their similarity.",
@@ -245,7 +245,7 @@
           }
         },
         "id2word_bert": {
-          "description": "A mapping of BERT vector id to a word or LU name. Vector id is simply its index in the embedding.",
+          "description": "A mapping of BERT vector id to an LU local id. Vector id is simply its index in the embedding.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
