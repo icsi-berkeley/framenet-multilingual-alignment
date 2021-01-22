@@ -113,19 +113,19 @@ if __name__ == "__main__":
 			if db_name in ["fnbrasil", "salsa"]:
 				vector.fe_mixed_matching(alignment)
 
-			vector.lu_muse_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3), (3, 0.3)])
+			vector.lu_muse_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3)])
 			vector.lu_mean_matching(alignment, en_emb, l2_emb)
 			vector.def_matching(alignment, en_emb, l2_emb)
 
-		if db_name in ["spanishfn", "fnbrasil"]:
+		if db_name in ["frenchfn", "spanishfn", "fnbrasil"]:
 			en_emb = get_lu_emb("bfn", "en", cache=True)
 			l2_emb = get_lu_emb(db_name, lang)
 
-			vector.lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3), (3, 0.3)])
-			vector.lu_mean_matching(alignment, en_emb, l2_emb)
+			vector.lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3)])
+			vector.lu_mean_matching(alignment, en_emb, l2_emb, 'bert')
 
-		alignment.dump(ignore_scores=set(["lu_muse"]))
-		# alignment.dump()
+		# alignment.dump(ignore_scores=set(["lu_muse"]))
+		alignment.dump()
 
 		logger.info(l2_fn.lang + " finished --- %s seconds ---" % (time.time() - start_time))
 

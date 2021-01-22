@@ -241,8 +241,8 @@ def lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs):
 			if vec is not None:
 				lu_nn[lu.gid] = list(zip(*search_idx.get_knn(vec, K=K)))
 
-	alignment.resources['lu_vec_nn'] = lu_nn
-	alignment.resources['id2word'] = {int(i):search_idx.id2word[i] for k,v in lu_nn.items() for d, i in v}
+	alignment.resources['lu_vec_nn_bert'] = lu_nn
+	alignment.resources['id2word_bert'] = {int(i):search_idx.id2word[i] for k,v in lu_nn.items() for d, i in v}
 
 	if len(scoring_configs) == 1:
 		scores = lu_scores(alignment, lu_nn, scoring_configs[0][0], scoring_configs[0][1])
@@ -324,42 +324,47 @@ def lu_muse_matching(alignment, en_emb, l2_emb, scoring_configs):
 			if vec is not None:
 				lu_nn[lu.gid] = list(zip(*search_idx.get_knn(vec, K=K)))
 
-	alignment.resources['lu_vec_nn'] = lu_nn
-	alignment.resources['id2word'] = {int(i):search_idx.id2word[i] for k,v in lu_nn.items() for d, i in v}
+	alignment.resources['lu_vec_nn_muse'] = lu_nn
+	alignment.resources['id2word_muse'] = {int(i):search_idx.id2word[i] for k,v in lu_nn.items() for d, i in v}
 
 	if len(scoring_configs) == 1:
 		scores = lu_scores(alignment, lu_nn, scoring_configs[0][0], scoring_configs[0][1])
-		alignment.add_scores(f'lu_muse', f'lu_muse', scores, desc='LU translations using MUSE')
+		alignment.add_scores(f'lu_muse', f'lu_muse', scores, desc='LU similarity using MUSE annotation vectors')
 	else:
 		for c in scoring_configs:
 			scores = lu_scores(alignment, lu_nn, c[0], c[1])
 			alignment.add_scores(
 				f'lu_muse_{c[0]}_{c[1]}', f'lu_muse', scores,
-				desc=f'LU translations using MUSE (K={c[0]}, Threshold={c[1]})',
+				desc=f'LU similarity using MUSE annotation vectors (K={c[0]}, Threshold={c[1]})',
 				K=c[0], threshold=c[1])
 
 
-def lu_mean_matching(alignment, en_emb, l2_emb):
+def lu_mean_matching(alignment, en_emb, l2_emb, name='muse'):
 	"""Computes scores of each pair of frames on the alignment based on
-	multilingual fastText vectors aligned using Multilingual Unsupervised or
-	Supervised word Embeddings (MUSE).
+	multilingual fastText vectors aligned using MUSE or BERT.
 
 	This methods scores the alignment between two frames based on the cosine
 	similarity of the mean vectors of all LUs in each frame.
 
 	:param alignment: An :class:`Alignment` instance.
 	:type alignment: :class:`Alignment`
-	:param en_emb: An :class:`Embedding`instance for english.
-	:type en_emb: :class:`Embedding`
-	:param l2_emb: An :class:`Embedding`instance for l2.
-	:type l2_emb: :class:`Embedding`
+	:param en_emb: An :class:`WordEmbedding`instance for english.
+	:type en_emb: :class:`WordEmbedding`
+	:param l2_emb: An :class:`WordEmbedding`instance for l2.
+	:type l2_emb: :class:`WordEmbedding`
+	:param name: The name of the embedding type.
+	:type name: str
 	"""
 	frm_mean_vecs = {}
+	if name == 'muse':
+		infer_func = lambda lu: emb.infer_vector(lu.clean_name)
+	else:
+		infer_func = lambda lu: emb.get_word_emb(lu.id)
 
 	for _, row in alignment.frm.iterrows():
 		frm = row["obj"]
 		emb = en_emb if frm.lang == "en" else l2_emb
-		lu_vecs = (emb.infer_vector(lu.clean_name) for lu in frm.lus)
+		lu_vecs = (infer_func(lu) for lu in frm.lus)
 		lu_vecs = [v for v in lu_vecs if v is not None]
 		if len(lu_vecs) > 0:
 			frm_mean_vecs[frm.gid] = np.mean(lu_vecs, axis=0)
@@ -372,7 +377,7 @@ def lu_mean_matching(alignment, en_emb, l2_emb):
 		else:
 			scores.append(0)
 
-	alignment.add_scores('lu_mean_muse', 'lu_mean_muse', scores, desc='LU centroid similarity using MUSE')
+	alignment.add_scores(f'lu_mean_{name}', f'lu_mean_{name}', scores, desc=f'LU centroid similarity using {name.upper()}')
 
 
 def fe_exact_matching(alignment, en_emb, l2_emb):

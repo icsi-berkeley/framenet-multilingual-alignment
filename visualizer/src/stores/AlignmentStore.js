@@ -28,7 +28,15 @@ const DEFAULT_PARAMS = {
 		displayOnlyFrameSet: false,
 		sankeyMaxEdges: 5,
 		limitSankeyEdges: true,
-	}
+	},
+	lu_bert: {
+		threshold: 0.4,
+		displayOnlyFrameSet: false,
+		sankeyMaxEdges: 5,
+		limitSankeyEdges: true,
+		neighborhoodSize: 5,
+		similarityThreshold: 0.3,
+	},
 }
 
 const FE_SCORING_TYPES = new Set([
@@ -154,14 +162,24 @@ class AlignmentStore {
 	synsetData = {}
 
 	/**
-	 * Mapping of english LU names to word vectors ids in L2 space.
+	 * Mapping of english LU names to MUSE word vectors ids in L2 space.
 	 */
-	vectorIdsByLU = []
+	museVectorIdsByLU = []
 
 	/**
-	 * Dictionary of words with vector ids as keys.
+	 * Dictionary of words with MUSE vector ids as keys.
 	 */
-	wordsByVectorId = []
+	museWordsByVectorId = []
+
+	/**
+	 * Mapping of english LU names to BERT word vectors ids in L2 space.
+	 */
+	bertVectorIdsByLU = []
+
+	/**
+	 * Dictionary of words with BERT vector ids as keys.
+	 */
+	bertwordsByVectorId = []
 
 	/**
 	 * Dictionary used for caching the vectors of frames.
@@ -193,9 +211,7 @@ class AlignmentStore {
 				displayOnlyFrameSet,
 				threshold,
 				// eslint-disable-next-line no-unused-vars
-				neighborhoodSize,
-				// eslint-disable-next-line no-unused-vars
-				similarityThreshold,
+				neighborhoodSize, similarityThreshold, limitSankeyEdges, sankeyMaxEdges
 			} = scoring.params;
 
 			await new Promise(resolve => setTimeout(resolve, 1000))
@@ -217,7 +233,7 @@ class AlignmentStore {
 			return [];
 		}
 	})
-	
+
 	/**
 	 * Returns the edges of a sankey diagram of the stored alignment respecting
 	 * UI params. 
@@ -307,8 +323,9 @@ class AlignmentStore {
 			case 'synset_inv':
 				return this.synsetGraph();
 			case 'lu_muse':
-			case 'lu_bert':
 				return this.LUMuseGraph();
+			case 'lu_bert':
+				return this.LUBertGraph();
 			case 'fe_matching':
 				return this.FEMatchingGraph();
 			default:
@@ -444,7 +461,7 @@ class AlignmentStore {
 		if (!this.frameVectorCache[bfnFrame.gid]) {
 			this.frameVectorCache[bfnFrame.gid] = 
 				bfnFrame.LUs
-					.map(x => this.vectorIdsByLU[x.gid])
+					.map(x => this.museVectorIdsByLU[x.gid])
 					.filter(x => x)
 					.flatMap(x => x.slice(0, params.neighborhoodSize))
 					.filter(x => x[0] >= params.similarityThreshold);
@@ -453,7 +470,7 @@ class AlignmentStore {
 		if (!this.frameVectorCache[l2Frame.gid]) {
 			this.frameVectorCache[l2Frame.gid] = new Set(
 				l2Frame.LUs
-					.flatMap(x => this.vectorIdsByLU[x.gid])
+					.flatMap(x => this.museVectorIdsByLU[x.gid])
 					.filter(x => x)
 					.map(x => x[1])
 			);
@@ -533,7 +550,7 @@ class AlignmentStore {
 	 */
 	LUMuseGraph() {
 		const nodes = this.getNodes();
-		const inter = this.getConnectionObjects(nodes, this.vectorIdsByLU, x => this.wordsByVectorId[x]);
+		const inter = this.getConnectionObjects(nodes, this.museVectorIdsByLU, x => this.museWordsByVectorId[x]);
 		const links = inter.links.filter(l => l.target.hasLeftSource);
 
 		nodes.push(...inter.nodes.filter(n => n.hasLeftSource));
@@ -547,6 +564,47 @@ class AlignmentStore {
 			.filter(l => (l.source.type === 'left' && l.target.isIntersection))
 			.forEach(l => l.source.isMatchingNode = true);
 		this.computeDegrees(links);
+
+		return { nodes, links };
+	}
+
+	/**
+	 * Returns the LU matching graph definition where a match between two LUs
+	 * happens when both their average annotation vectors have cosine similarity
+	 * of more than .3.
+	 * 
+	 * @public
+	 * @method
+	 * @returns {Object} Graph definition with a node list and a link list.
+	 */
+	LUBertGraph() {
+		const {params} = this.uiState.scoring;
+
+		const nodes = this.getNodes();
+
+		nodes.forEach(x => x.isReferenceNode = true);
+		const left = nodes.filter(x => x.type === "left");
+		const right = nodes.filter(x => x.type === "right");
+
+		const links = [];
+
+		for (let a of left) {
+			const neighborhood = 
+				(this.bertVectorIdsByLU[a.gid] || [])
+					.slice(0, params.neighborhoodSize)
+					.filter(t => !Array.isArray(t) || t[0] > params.similarityThreshold)
+					.map(t => this.bertWordsByVectorId[Array.isArray(t) ? t[1] : t])
+					.filter(t => t);
+
+			for (let b of right) {
+				let id = b.gid.replace(/\d+\.\w{2}\./, '')
+				if (neighborhood.indexOf(id) > -1) {
+					links.push({ source: a, target: b });
+					a.isMatchingNode = true;
+					b.isMatchingNode = true;
+				}
+			}
+		}
 
 		return { nodes, links };
 	}
@@ -570,10 +628,7 @@ class AlignmentStore {
 		for (let a of left) {
 			for (let b of right) {
 				if (a.type !== b.type && a.name === b.name) {
-					links.push({ 
-						source: a,
-						target: b, 
-					})
+					links.push({ source: a, target: b })
 					a.isMatchingNode = true;
 					b.isMatchingNode = true;
 				}
@@ -764,8 +819,10 @@ class AlignmentStore {
 		this.frames = data.frames;
 		this.synsetsByLU = data.resources.lu_to_syn;
 		this.synsetData = data.resources.syn_data;
-		this.vectorIdsByLU = data.resources.lu_vec_nn;
-		this.wordsByVectorId = data.resources.id2word;
+		this.museVectorIdsByLU = data.resources.lu_vec_nn_muse;
+		this.museWordsByVectorId = data.resources.id2word_muse;
+		this.bertVectorIdsByLU = data.resources.lu_vec_nn_bert;
+		this.bertwordsByVectorId = data.resources.id2word_bert;
 
 		// Resets
 		this.uiState.setSelectedFramePair(null, null);
@@ -782,8 +839,10 @@ decorate(AlignmentStore, {
 	frames: observable,
 	synsetsByLU: observable,
 	synsetData: observable,
-	vectorIdsByLU: observable,
-	wordsByVectorId: observable,
+	museVectorIdsByLU: observable,
+	museWordsByVectorId: observable,
+	bertVectorIdsByLU: observable,
+	bertwordsByVectorId: observable,
 	isLoading: observable,
 	lexicalIndices: computed,
 	sankeyData: computed,
