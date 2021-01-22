@@ -203,8 +203,8 @@
             }
           }
         },
-        "lu_vec_nn": {
-          "description": "A mapping of LU global ids -> LU vector neighborhood.",
+        "lu_vec_nn_muse": {
+          "description": "A mapping of LU global ids -> MUSE LU vector neighborhood.",
           "type": "object",
           "additionalProperties": {
             "description": "The LU neighborhood of size K (defined during the alignment) in vector space represented by a list of other LU ids and their similarity.",
@@ -220,8 +220,32 @@
             }
           }
         },
-        "id2_word": {
-          "description": "A mapping of vector id to a word or LU name. Vector id is simply its index in the embedding.",
+        "id2word_muse": {
+          "description": "A mapping of MUSE vector id to a word or LU name. Vector id is simply its index in the embedding.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "lu_vec_nn_bert": {
+          "description": "A mapping of LU global ids -> BERT LU vector neighborhood.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "The LU neighborhood of size K (defined during the alignment) in vector space represented by a list of other LU ids and their similarity.",
+            "type": "array",
+            "items": {
+              "description": "A neighbor vector representation consisting of its LU's global id and similarity.",
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        },
+        "id2word_bert": {
+          "description": "A mapping of BERT vector id to a word or LU name. Vector id is simply its index in the embedding.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
