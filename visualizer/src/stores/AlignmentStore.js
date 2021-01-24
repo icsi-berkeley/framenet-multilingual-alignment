@@ -463,8 +463,7 @@ class AlignmentStore {
 				bfnFrame.LUs
 					.map(x => this.museVectorIdsByLU[x.gid])
 					.filter(x => x)
-					.flatMap(x => x.slice(0, params.neighborhoodSize))
-					.filter(x => x[0] >= params.similarityThreshold);
+					.map(x => x.filter(x => x[0] >= params.similarityThreshold).slice(0, params.neighborhoodSize));
 		}
 
 		if (!this.frameVectorCache[l2Frame.gid]) {
@@ -475,9 +474,9 @@ class AlignmentStore {
 					.map(x => x[1])
 			);
 		}
-	
+
 		const matches = this.frameVectorCache[bfnFrame.gid]
-				.filter(x => x && this.frameVectorCache[l2Frame.gid].has(x[1]));
+				.filter(x => x && x.some(y => this.frameVectorCache[l2Frame.gid].has(y[1])));
 		
 		return matches.length / bfnFrame.LUs.length;
 	}
@@ -578,18 +577,18 @@ class AlignmentStore {
 	 * @returns {Object} Graph definition with a node list and a link list.
 	 */
 	LUBertGraph() {
-		console.log('pimbou')
 		const {params} = this.uiState.scoring;
 
 		const nodes = this.getNodes();
 
-		nodes.forEach(x => x.isReferenceNode = true);
 		const left = nodes.filter(x => x.type === "left");
 		const right = nodes.filter(x => x.type === "right");
 
 		const links = [];
 
 		for (let a of left) {
+			a.isReferenceNode = true;
+
 			const neighborhood = 
 				(this.bertVectorIdsByLU[a.gid] || [])
 					.slice(0, params.neighborhoodSize)
@@ -602,7 +601,6 @@ class AlignmentStore {
 				if (neighborhood.indexOf(id) > -1) {
 					links.push({ source: a, target: b });
 					a.isMatchingNode = true;
-					b.isMatchingNode = true;
 				}
 			}
 		}

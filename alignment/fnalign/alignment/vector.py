@@ -50,7 +50,9 @@ def lu_scores(alignment, lu_vecs, K, thres):
 	}
 
 	frm_vecs = defaultdict(set)
-	for _, row in alignment.frm.iterrows():
+
+	# L2 LUs will have a single vector in lu_vecs 
+	for _, row in alignment.l2_frm.iterrows():
 		frame = row["obj"]
 		for lu in frame.lus:
 			if lu.gid in vec_sets:
@@ -62,8 +64,12 @@ def lu_scores(alignment, lu_vecs, K, thres):
 		if len(frame.lus) == 0:
 			scores.append(0)
 		else:
-			scores.append(len(frm_vecs[frame.gid] & frm_vecs[other.gid]) / len(frame.lus))
-	
+			mcount = 0
+			for lu in frame.lus:
+				if lu.gid in vec_sets and len(vec_sets[lu.gid] & frm_vecs[other.gid]) > 0:
+					mcount += 1
+			scores.append(mcount / len(frame.lus))
+
 	return scores
 
 def infer_vec_fe(text, emb):
@@ -246,13 +252,13 @@ def lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs):
 
 	if len(scoring_configs) == 1:
 		scores = lu_scores(alignment, lu_nn, scoring_configs[0][0], scoring_configs[0][1])
-		alignment.add_scores(f'lu_bert', f'lu_bert', scores, desc='LU translations using BERT')
+		alignment.add_scores(f'lu_bert', f'lu_bert', scores, desc='LU similarity using BERT annotation vectors')
 	else:
 		for c in scoring_configs:
 			scores = lu_scores(alignment, lu_nn, c[0], c[1])
 			alignment.add_scores(
 				f'lu_bert_{c[0]}_{c[1]}', f'lu_bert', scores,
-				desc=f'LU translations using BERT (K={c[0]}, Threshold={c[1]})',
+				desc=f'LU similarity using BERT annotation vectors (K={c[0]}, Threshold={c[1]})',
 				K=c[0], threshold=c[1])
 
 
@@ -329,13 +335,13 @@ def lu_muse_matching(alignment, en_emb, l2_emb, scoring_configs):
 
 	if len(scoring_configs) == 1:
 		scores = lu_scores(alignment, lu_nn, scoring_configs[0][0], scoring_configs[0][1])
-		alignment.add_scores(f'lu_muse', f'lu_muse', scores, desc='LU similarity using MUSE annotation vectors')
+		alignment.add_scores(f'lu_muse', f'lu_muse', scores, desc='LU translations using MUSE')
 	else:
 		for c in scoring_configs:
 			scores = lu_scores(alignment, lu_nn, c[0], c[1])
 			alignment.add_scores(
 				f'lu_muse_{c[0]}_{c[1]}', f'lu_muse', scores,
-				desc=f'LU similarity using MUSE annotation vectors (K={c[0]}, Threshold={c[1]})',
+				desc=f'LU translations using MUSE (K={c[0]}, Threshold={c[1]})',
 				K=c[0], threshold=c[1])
 
 
