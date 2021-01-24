@@ -35,4 +35,4 @@ Launch ViToXF.  You will see the basic Vtx screen, with the message "No data to 
 
 (3) Check the boxes for one or more frames from the list of frames.  You can use the search function to find the names of frames of interest.
 
-(4) A [Sankey][https://en.wikipedia.org/wiki/Sankey_diagram] diagram will appear in the right-hand column showing the frame alignments that meet the current constraints. Changes in the parameters of the alignment algorithm on the left will immediately appear in the graph at the right.
+(4) A [Sankey diagram](https://en.wikipedia.org/wiki/Sankey_diagram) will appear in the right-hand column showing the frame alignments that meet the current constraints. Changes in the parameters of the alignment algorithm on the left will immediately appear in the graph at the right.
