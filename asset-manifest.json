@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/framenet-multilingual-alignment/static/css/main.8d581849.chunk.css",
-    "main.js": "/framenet-multilingual-alignment/static/js/main.eb3d6b09.chunk.js",
-    "main.js.map": "/framenet-multilingual-alignment/static/js/main.eb3d6b09.chunk.js.map",
+    "main.js": "/framenet-multilingual-alignment/static/js/main.d0f5abca.chunk.js",
+    "main.js.map": "/framenet-multilingual-alignment/static/js/main.d0f5abca.chunk.js.map",
     "runtime-main.js": "/framenet-multilingual-alignment/static/js/runtime-main.e2375059.js",
     "runtime-main.js.map": "/framenet-multilingual-alignment/static/js/runtime-main.e2375059.js.map",
     "static/css/2.33ddfd2b.chunk.css": "/framenet-multilingual-alignment/static/css/2.33ddfd2b.chunk.css",
-    "static/js/2.f3dee035.chunk.js": "/framenet-multilingual-alignment/static/js/2.f3dee035.chunk.js",
-    "static/js/2.f3dee035.chunk.js.map": "/framenet-multilingual-alignment/static/js/2.f3dee035.chunk.js.map",
+    "static/js/2.59b8c977.chunk.js": "/framenet-multilingual-alignment/static/js/2.59b8c977.chunk.js",
+    "static/js/2.59b8c977.chunk.js.map": "/framenet-multilingual-alignment/static/js/2.59b8c977.chunk.js.map",
     "index.html": "/framenet-multilingual-alignment/index.html",
-    "precache-manifest.2a11b8da4681a8f8cc4dbfab06787b0a.js": "/framenet-multilingual-alignment/precache-manifest.2a11b8da4681a8f8cc4dbfab06787b0a.js",
+    "precache-manifest.bf2156a148b643be8b300a62c478e0ca.js": "/framenet-multilingual-alignment/precache-manifest.bf2156a148b643be8b300a62c478e0ca.js",
     "service-worker.js": "/framenet-multilingual-alignment/service-worker.js",
     "static/css/2.33ddfd2b.chunk.css.map": "/framenet-multilingual-alignment/static/css/2.33ddfd2b.chunk.css.map",
     "static/css/main.8d581849.chunk.css.map": "/framenet-multilingual-alignment/static/css/main.8d581849.chunk.css.map",
-    "static/js/2.f3dee035.chunk.js.LICENSE.txt": "/framenet-multilingual-alignment/static/js/2.f3dee035.chunk.js.LICENSE.txt"
+    "static/js/2.59b8c977.chunk.js.LICENSE.txt": "/framenet-multilingual-alignment/static/js/2.59b8c977.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e2375059.js",
     "static/css/2.33ddfd2b.chunk.css",
-    "static/js/2.f3dee035.chunk.js",
+    "static/js/2.59b8c977.chunk.js",
     "static/css/main.8d581849.chunk.css",
-    "static/js/main.eb3d6b09.chunk.js"
+    "static/js/main.d0f5abca.chunk.js"
   ]
 }
