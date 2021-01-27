@@ -286,13 +286,10 @@ class AlignmentStore {
 			}))
 			.sort((a, b) => (a.label < b.label) ? -1 : (a.label > b.label) ? 1 : 0);
 
-		if (!scoring)
-			return options.map(x => ({ ...x, disabled: true }));
-		
-		if (FE_SCORING_TYPES.has(scoring.type))
+			if (scoring && FE_SCORING_TYPES.has(scoring.type))
 			return options.map(x => ({ ...x, disabled: this.frames[x.id].FEs.length === 0 }))
 
-		if (LU_SCORING_TYPES.has(scoring.type))
+		if (scoring && LU_SCORING_TYPES.has(scoring.type))
 			return options.map(x => ({ ...x, disabled: this.frames[x.id].LUs.length === 0 }))
 
 		return options;

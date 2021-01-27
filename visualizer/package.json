@@ -1,6 +1,6 @@
 {
   "name": "mlfn-alignment-visualizer",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "private": true,
   "author": "Arthur Lorenzi",
   "description": "A tool for Multilingual FrameNet alignment visualization",
@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
-    "electron-build": "PUBLIC_URL=./ react-scripts build && cp electron.js build/electron.js && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder -mwl"
+    "electron-build": "PUBLIC_URL=./ react-scripts build && cp electron.js build/electron.js && electron-builder -mwl"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -18,6 +18,18 @@ import Slider from './Slider';
 import AlignmentStore from '../stores/AlignmentStore';
 import UiState from '../stores/UiState';
 
+const SearchWithControlledInput = ({ searchPlaceholder, onChange, value }) => {
+	return (
+		<input
+			type="text"
+			className="multi-select-search"
+			value={value}
+			placeholder="Search..."
+			onChange={onChange}
+		/>
+	);
+};
+
 /**
  * 
  * A Sidebar component for the alignment visualization tool. This sidebar
@@ -261,6 +273,9 @@ const Sidebar = observer(
 							items={store.frameOptions}	
 							selectedItems={uiState.sankeyFrames}
 							onChange={this.onFrameSelectionChange}
+							searchRenderer={SearchWithControlledInput}
+							searchValue={uiState.frameSearchValue}
+							searchValueChanged={v => uiState.frameSearchValue = v }
 							responsiveHeight="350px"
 							itemHeight={30}
 							wrapperClassName="multi-select-wrapper"

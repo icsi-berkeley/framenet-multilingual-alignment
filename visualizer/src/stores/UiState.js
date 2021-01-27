@@ -36,6 +36,11 @@ class UiState {
 	 */
 	selectedFrames = [null, null]
 
+	/**
+	 * Input value used for filtering in the frame selection component.
+	 */
+	frameSearchValue = ''
+
 	height = null
 
 	width = null
@@ -60,6 +65,7 @@ class UiState {
 	 */
 	setScoring(id) {
 		this.scoring = this.scoringOptions.find(x => x.id === id);
+		this.frameSearchValue = '';
 	}
 
 	/**
@@ -84,6 +90,7 @@ decorate(UiState, {
 	scoringOptions: observable,
 	sankeyFrames: observable,
 	selectedFrames: observable,
+	frameSearchValue: observable,
 	height: observable,
 	width: observable,
 	scoringSelectOptions: computed,
