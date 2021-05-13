@@ -1,3 +1,7 @@
+## Multilingual Framenet
+
+We're still working on this project, documentation is still not completed and we plan to add more languages and expand the techniques of the existing ones. Feel free to open issues if you have any question. Thank you!
+
 ## Running the alignment
  - Make sure you have **Conda** installed (https://docs.conda.io/en/latest/)
  - Copy all required data to a folder **data** on the root of the project
