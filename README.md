@@ -1,6 +1,8 @@
 ## Multilingual Framenet
 
-We're still working on this project, documentation is still not completed and we plan to add more languages and expand the techniques of the existing ones. Feel free to open issues if you have any question. Thank you!
+If you want to experiment with ViToXF, our alignment visualization tool, you can download the most recent version under this repo Releases ([link](https://github.com/icsi-berkeley/framenet-multilingual-alignment/releases)). Please refer to the [user's guide](https://github.com/icsi-berkeley/framenet-multilingual-alignment/blob/master/ViToXFUserGuide.md) and if you have any question, feel free to open an issue. Thank you!
+
+We're still working on this project, documentation is still not completed and we plan to add more languages and expand the techniques of the existing ones. 
 
 ## Running the alignment
  - Make sure you have **Conda** installed (https://docs.conda.io/en/latest/)
