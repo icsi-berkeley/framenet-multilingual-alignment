@@ -17,7 +17,7 @@ def id_matching(alignment):
 	
 	alignment.add_scores(
 		'id_matching', 'attr_matching', scores,
-		desc=f'Matching ID/Name')
+		desc=f'Matching ID')
 
 def name_matching(alignment):
 	"""Computes the alignment score of each frame pair in ``alignment``. When
@@ -32,7 +32,7 @@ def name_matching(alignment):
 	
 	alignment.add_scores(
 		'name_matching', 'attr_matching', scores,
-		desc=f'Matching ID/Name')
+		desc=f'Matching Name')
 
 def fe_matching(alignment):
 	"""Computes the jaccard score of each frame pair in ``alignment`` based on
