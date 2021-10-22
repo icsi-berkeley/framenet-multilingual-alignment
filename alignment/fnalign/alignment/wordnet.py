@@ -23,9 +23,11 @@ LANG_MAP = {
 	"es": "spa",
 	"fr": "fra",
 	"ja": "jpn",
-	"pt":  "por",
+	"pt": "por",
 	"zh": "cmn",
 	"sv": "swe",
+	"nl": "nld",
+	"de": "deu",
 }
 
 

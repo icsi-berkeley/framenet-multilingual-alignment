@@ -48,7 +48,7 @@ class FNLoader():
 		:returns: List of supported database schemas.
 		:rtype: list[str]
 		"""
-		return ['bfn', 'frenchfn', 'japanesefn', 'spanishfn']
+		return ['bfn', 'frenchfn', 'japanesefn', 'spanishfn', 'dutchfn']
 
 	def frames(self):
 		"""Yields the xml root of all existent frames on the dataset identified by

@@ -177,8 +177,8 @@ def fe_score(frame, other, def_vecs, name_vecs):
 	:type other: class:`Frame`
 	:param def_vecs: FE definition vectors dictionary.
 	:type def_vecs: dict
-	:param def_vecs: FE name vectors dictionary.
-	:type def_vecs: dict
+	:param name_vecs: FE name vectors dictionary.
+	:type name_vecs: dict
 	:returns: The alignment score between the frame pair.
 	:rtype: float
 	"""
