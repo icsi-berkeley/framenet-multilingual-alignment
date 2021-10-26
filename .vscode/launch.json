@@ -18,8 +18,16 @@
       "program": "${cwd}/alignment/bertalign/europarl_to_fastalign.py",
       "console": "integratedTerminal",
       "args": [
-        "es"
+        "nl"
       ]
+    },
+    {
+      "name": "Kyoto wiki to fastalign",
+      "type": "python",
+      "request": "launch",
+      "program": "${cwd}/alignment/bertalign/kyoto_to_fastalign.py",
+      "console": "integratedTerminal",
+      "args": []
     },
     {
       "name": "Create alignment data",
@@ -28,12 +36,14 @@
       "program": "${cwd}/alignment/bertalign/create_alignment_data.py",
       "console": "integratedTerminal",
       "args": [
-        "--input_sentence_file=${cwd}/data/europarl/es-en/fastalign-europarl.es-en",
-        "--input_mapping_file=${cwd}/data/europarl/es-en/fastalign-europarl.es-en.intersect.align",
+        "--input_sentence_file=${cwd}/data/europarl/nl-en/fastalign-europarl.nl-en",
+        // "--input_sentence_file=${cwd}/data/kyoto-wiki-corpus/fastalign-kyoto-wiki.jp-en",
+        "--input_mapping_file=${cwd}/data/europarl/nl-en/fastalign-europarl.nl-en.intersect.align",
+        // "--input_mapping_file=${cwd}/data/kyoto-wiki-corpus/fastalign-kyoto-wiki.jp-en.intersect.align",
         "--vocab_file=${cwd}/models/multi_cased_L-12_H-768_A-12/vocab.txt",
         "--bert_config_file=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_config.json",
         "--init_checkpoint=${cwd}/models/multi_cased_L-12_H-768_A-12/bert_model.ckpt",
-        "--output_file=${cwd}/data/bert/256-50000-12345-fastalign-europarl.es-en.tfrecord",
+        "--output_file=${cwd}/data/bert/256-50000-12345-fastalign-europarl.nl-en.tfrecord",
         "--layers=-1",
         "--do_lower_case=False",
         "--max_seq_length=256",
@@ -48,7 +58,7 @@
       "program": "${cwd}/alignment/bertalign/run_alignment.py",
       "console": "integratedTerminal",
       "args": [
-        "--input_file=${cwd}/data/bert/256-50000-12345-fastalign-europarl.es-en.tfrecord",
+        "--input_file=${cwd}/data/bert/256-50000-12345-fastalign-europarl.nl-en.tfrecord",
         "--output_dir=${cwd}/alignment_output",
         "--do_train=True",
         // "--do_eval=True",
@@ -69,9 +79,9 @@
       "program": "${cwd}/alignment/create_lu_vectors.py",
       "console": "integratedTerminal",
       "args": [
-        "spanishfn",
-        "es",
-        "/home/arthur/Projects/framenet-multilingual-alignment/models/50k_es_multi_aligned_cased_L-12_H-768_A-12/vocab.txt"
+        "japanesefn",
+        "jp",
+        "/home/arthur/Projects/framenet-multilingual-alignment/models/50k_jp_multi_aligned_cased_L-12_H-768_A-12/vocab.txt"
       ]
     },
     {
