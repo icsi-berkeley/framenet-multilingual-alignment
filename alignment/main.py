@@ -17,7 +17,6 @@ from fnalign.evaluation import gold_scores
 
 MUSE_NMAX=200000
 MUSE_EMBS = {}
-LU_EMBS = {}
 
 def get_muse_emb(lang, nmax=200000, cache=False):
 	"""Instantiates a new :class:`MuseWordEmbedding` with language ``lang`` when needed,
@@ -45,7 +44,7 @@ def get_muse_emb(lang, nmax=200000, cache=False):
 
 	return emb
 
-def get_lu_emb(db_name, lang, cache=False):
+def get_lu_emb(db_name, lang, en=False):
 	"""Instantiates a new :class:`LUEmbedding` with language ``lang`` when needed,
 	otherwise retrieves one from cache.
 
@@ -53,35 +52,32 @@ def get_lu_emb(db_name, lang, cache=False):
 	:type lang: str
 	:param lang: Language of the embedding.
 	:type lang: str
-	:param cache: Whether getting an embedding from cache should be considered.
-	:type cache: bool
+	:param en: Should return the english embeddings aligned to ``db_name``.
+	:type en: bool
 	:returns: An :class:`LUEmbedding` object for ``lang``.
 	:rtype: :class:`LUEmbedding`
 	"""
-	if cache and lang in LU_EMBS:
-		return LU_EMBS[lang]
-
-	path = os.path.join('data', 'bert', f'{db_name}_lu_embs.json')
+	if en:
+		path = os.path.join('data', 'bert', f'{db_name}_en_lu_embs.json')
+	else:
+		path = os.path.join('data', 'bert', f'{db_name}_lu_embs.json')
 
 	emb = LUEmbedding(lang, 768)
 	emb.load_from_file(path)
-
-	if cache:
-		LU_EMBS[lang] = emb
 
 	return emb
 
 
 if __name__ == "__main__":
 	configs = [
-		# ('chinesefn', 'zh'),
-		# ('japanesefn', 'ja'),
-		# ('frenchfn', 'fr'),
+		('chinesefn', 'zh'),
+		('japanesefn', 'ja'),
+		('frenchfn', 'fr'),
 		('spanishfn', 'es'),
-		# ('fnbrasil', 'pt'),
-		# ('swedishfn', 'sv'),
-		# ('salsa', 'de'),
-		# ('dutchfn', 'nl'),
+		('fnbrasil', 'pt'),
+		('swedishfn', 'sv'),
+		('salsa', 'de'),
+		('dutchfn', 'nl'),
 	]
 
 	en_fn = load("bfn", "en")
@@ -104,6 +100,7 @@ if __name__ == "__main__":
 		wordnet.lu_matching(alignment)
 		wordnet.synset_matching(alignment)
 
+		# MUSE techniques
 		if db_name not in ["chinesefn", "japanesefn"]:
 			en_emb = get_muse_emb("en", nmax=MUSE_NMAX, cache=True)
 			l2_emb = get_muse_emb(lang, nmax=MUSE_NMAX)
@@ -119,8 +116,10 @@ if __name__ == "__main__":
 			vector.lu_mean_matching(alignment, en_emb, l2_emb)
 			vector.def_matching(alignment, en_emb, l2_emb)
 
-		if db_name in ["frenchfn", "spanishfn", "fnbrasil"]:
-			en_emb = get_lu_emb("bfn", "en", cache=True)
+
+		# BERT techniques
+		if db_name != "chinesefn":
+			en_emb = get_lu_emb(db_name, lang, en=True)
 			l2_emb = get_lu_emb(db_name, lang)
 
 			vector.lu_bert_matching(alignment, en_emb, l2_emb, scoring_configs=[(5, 0.3)])

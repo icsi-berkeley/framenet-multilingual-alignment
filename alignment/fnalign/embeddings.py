@@ -31,7 +31,10 @@ class WordEmbedding():
 		:returns: the embedding for ``word``
 		:rtype: np.array
 		"""
-		return self.embeddings[self.word2id[word]]
+		try:
+			return self.embeddings[self.word2id[word]]
+		except:
+			return None
 
 	def load_from_file(self, path, nmax=None):
 		"""Loads vectors from .vec file to memory.
