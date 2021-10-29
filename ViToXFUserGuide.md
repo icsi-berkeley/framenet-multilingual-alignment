@@ -37,3 +37,13 @@ Launch ViToXF.  You will see the basic Vtx screen, with the message "No data to 
 (3) Check the boxes for one or more frames from the list of frames.  You can use the search function to find the names of frames of interest.
 
 (4) A [Sankey diagram](https://en.wikipedia.org/wiki/Sankey_diagram) will appear in the right-hand column showing the frame alignments that meet the current constraints. Changes in the parameters of the alignment algorithm on the left will immediately appear in the graph at the right.
+
+## Acknowledgements
+
+We are grateful for the support of the U.S. National Science Foundation (NSF #1629989) which made this alignment project possible, and for their support of the FrameNet project over the years, beginning with a grant to Prof. Charles J. Fillmore in 1997.  We are also grateful to each of the collaborating FrameNet-related projects for providing us with their data.  We especially wish to acknowledge the work of Arthur Lorenzi, who built the release version of the software and compiled the alignment databases.  
+
+The Spanish FrameNet project (PI: Carlos Subirats) has been developed at the Autonomous University of Barcelona (Spain) and the International Computer Science Institute (Berkeley, CA) in cooperation with the FrameNet Project.  They also wish to acknowledge previous funding provided by the Ministry of Economy and Competitiveness of Spain (Grants Nr. FFI2017-84460-P, FFI2014-56444-C2-1-P and FFI2011-23231), the Department of Science and Innovation (FFI2008-0875), and the Department of Science and Technology (TIC2002-01338). Additional funding has also been provided by the Fundación Comillas, the Department of Education (TSI2005-01200), and the Autonomous University of Barcelona (PNL2004-49 and PRP2006-04).
+
+For further information on the FrameNet-related projects including in this alignment, please see 
+
+https://framenet.icsi.berkeley.edu/fndrupal/framenets_in_other_languages
