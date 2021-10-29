@@ -1,6 +1,7 @@
 import os
 import time
 import logging
+import pandas as pd
 
 global_time = time.time()
 
@@ -15,8 +16,8 @@ from fnalign.alignment import attribute
 
 if __name__ == "__main__":
 	configs = [
-		('chinesefn', 'zh'),
-		('japanesefn', 'ja'),
+		# ('chinesefn', 'zh'),
+		# ('japanesefn', 'ja'),
 		('frenchfn', 'fr'),
 		('spanishfn', 'es'),
 		('fnbrasil', 'pt'),
@@ -32,26 +33,31 @@ if __name__ == "__main__":
 
 		l2_fn = load(db_name, lang)
 		alignment = Alignment(en_fn, l2_fn)
-
-		if db_name not in ["chinesefn", "swedishfn"]:
-			attribute.id_matching(alignment)
+		df = pd.DataFrame(0, index=alignment.en_frm['name'], columns=alignment.l2_frm['name'])
 
 		if db_name != "fnbrasil":
 			attribute.name_matching(alignment)
+			df_score = alignment.scores[-1]["df"]
+			df = df.add(df_score, fill_value=0)
+
+		logger.info(f'     matching name count    = {len(df.loc[:, (df == len(alignment.scores)).sum() > 0].columns)}')
 
 		if db_name != "chinesefn":
 			attribute.fe_matching(alignment)
+			df_score = alignment.scores[-1]["df"]
+			df = df.add(df_score, fill_value=0)
 
-		score_dfs = list(map(lambda x: x['df'], alignment.scores))
-		df = score_dfs[0]
+		logger.info(f'     matching name/fe count = {len(df.loc[:, (df == len(alignment.scores)).sum() > 0].columns)}')
 
-		if len(score_dfs) >= 2:
-			df = df.add(score_dfs[1], fill_value=0)
-		
-		if len(score_dfs) == 3:
-			df = df.add(score_dfs[2], fill_value=0)
+		if db_name not in ["chinesefn", "swedishfn"]:
+			attribute.id_matching(alignment)
+			df_score = alignment.scores[-1]["df"]
+			df = df.add(df_score, fill_value=0)
 
-		pairs = df[df == len(score_dfs)].stack().index.tolist()
+		logger.info(f'     matching id count      = {len(df.loc[:, (df == len(alignment.scores)).sum() > 0].columns)}')
+		logger.info(f'')
+
+		pairs = df[df == len(alignment.scores)].stack().index.tolist()
 		path = os.path.join('out', f'gold_{db_name}.txt')
 
 		with open(path, 'w+') as fp:
