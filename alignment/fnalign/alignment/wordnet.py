@@ -59,7 +59,7 @@ def get_mappings(frm_df):
 					lu_to_syn[lu.gid].add(syn.name())
 					syn_to_lu[syn.name()].add(lu.name)
 					frm_to_syn[frame.gid].add(syn.name())
-			except ValueError:
+			except:
 				print(f"Error searching for lemma synsets. Lemma={lemma}, POS={lu.pos}")
 
 	return { 

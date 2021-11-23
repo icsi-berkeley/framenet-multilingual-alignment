@@ -97,6 +97,8 @@ if __name__ == "__main__":
 		if db_name != "chinesefn":
 			attribute.fe_matching(alignment)
 
+		attribute.fe_matching(alignment, core_only=False)
+
 		wordnet.lu_matching(alignment)
 		wordnet.synset_matching(alignment)
 
