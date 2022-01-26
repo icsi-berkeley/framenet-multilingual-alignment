@@ -18,14 +18,12 @@ from fnalign.evaluation import gold_scores
 MUSE_NMAX=200000
 MUSE_EMBS = {}
 
-def get_muse_emb(lang, nmax=200000, cache=False):
+def get_muse_emb(lang, cache=False):
 	"""Instantiates a new :class:`MuseWordEmbedding` with language ``lang`` when needed,
 	otherwise retrieves one from cache.
 
 	:param lang: Language of the embedding.
 	:type lang: str
-	:param nmax: Maximum number of vectors to be loaded.
-	:type nmax: int
 	:param cache: Whether getting an embedding from cache should be considered.
 	:type cache: bool
 	:returns: An :class:`MuseWordEmbedding` object for ``lang``.
@@ -34,10 +32,10 @@ def get_muse_emb(lang, nmax=200000, cache=False):
 	if cache and lang in MUSE_EMBS:
 		return MUSE_EMBS[lang]
 
-	path = os.path.join('data', 'muse', f'wiki.multi.{lang}.vec')
+	path = os.path.join('data', 'muse', f'wiki.{lang}.align.vec')
 
 	emb = MuseWordEmbedding(lang, 300)
-	emb.load_from_file(path, nmax=nmax)
+	emb.load_from_file(path, nmax=MUSE_NMAX)
 
 	if cache:
 		MUSE_EMBS[lang] = emb
@@ -103,11 +101,11 @@ if __name__ == "__main__":
 		wordnet.synset_matching(alignment)
 
 		# MUSE techniques
-		if db_name not in ["chinesefn", "japanesefn"]:
-			en_emb = get_muse_emb("en", nmax=MUSE_NMAX, cache=True)
-			l2_emb = get_muse_emb(lang, nmax=MUSE_NMAX)
+		if db_name != "japanesefn":
+			en_emb = get_muse_emb("en", cache=True)
+			l2_emb = get_muse_emb(lang)
 
-			if lang != 'sv':
+			if db_name not in ["chinesefn", "swedishfn"]:
 				vector.fe_matching(alignment, en_emb, l2_emb)
 				vector.fe_exact_matching(alignment, en_emb, l2_emb)
 				
